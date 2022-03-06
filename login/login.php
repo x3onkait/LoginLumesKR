@@ -63,18 +63,27 @@
         <div id="login-form" class="w-50 ml-auto mr-auto mt-5">
             <div class="mb-3 ">
                 <label for="exampleFormControlInput1" class="form-label">아이디</label>
-                <input name="id" type="text" class="form-control" id="exampleFormControlInput1"
+                <input name="id" type="text" class="form-control" autocomplete="on"
                     placeholder="당신은 누구인가요?">
             </div>
             <div class="mb-3 ">
                 <label for="exampleFormControlInput1" class="form-label">비밀번호</label>
-                <input name="password" type="password" class="form-control" id="exampleFormControlInput1"
+                <input name="password" type="password" class="form-control" autocomplete="on"
                     placeholder="쉿! 다른 사람들이 보지 않게 비밀스럽게 입력하세요...">
             </div>
 
             <button type="submit" class="btn btn-primary mb-3">로그인하기</button>
+
+            <!-- 로그인 정보 찾기 -->
+            <div id="findLoginInfoButtonGroup">
+                <button type="button" onclick="location.href = './findLoginInfo/findID.php'" class="btn btn-secondary mb-3">아이디 찾기</button>
+                <button type="button" onclick="location.href = './findLoginInfo/findPassword.php'" class="btn btn-secondary mb-3">비밀번호 찾기</button>
+            </div>
+
         </div>
     </form>
+
+    
 </body>
 
 </html>
