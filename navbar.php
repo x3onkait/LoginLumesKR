@@ -11,21 +11,11 @@
                 <!-- <li class="nav-item active">
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li> -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        💻 서비스들
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="http://whatsupcrypto.lumes.kr" target="_blank">🚀 실시간 암호화폐
-                            현황판</a>
-                        <a class="dropdown-item" href="http://cvs.lumes.kr" target="_blank">🥽 CVS 알아보기</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">또 뭘 만들어 볼까요?</a>
-                    </div>
-                </li>
                 <li>
                     <a class="nav-link" href="http://lumes.kr" target="_blank">LUMES.KR</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="https://github.com/x3onkait/LoginLumesKR" target="_blank">Github</a>
                 </li>
                 <li>
                     <a class="nav-link" href="/expranking/expranking.php">경험치 랭킹</a>
