@@ -103,6 +103,38 @@
                     style="position:relative; float: right; margin-top: 5px;">이메일 중복 검사</button>
             </div>
 
+            <!-- 개인정보 처리방침 -->
+            <p>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    개인정보 처리방침 및 서비스 규약
+                </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                귀하는 본 사이트인 login.lumes.kr에 가입함으써, 아래의 규칙 및 개인정보 처리방침에 대해 동의하게 됩니다.<br><br>
+
+                &nbsp;&nbsp;- 귀하는 가입을 하면서 ID와 닉네임, 비밀번호, 이메일을 입력해야 하며, 이때 이메일은 실제 사용 이메일을 첨부하여야 합니다. 사용 불가능한 이메일을 임의로 넣을 경우 계정 복구 등 도움 절차에 있어 신원 파악이 불가한 바, 불이익을 받을 수 있습니다.<br><br>
+
+                &nbsp;&nbsp;- 관리자는 정보 보안 위협에 대비하여 최대한 개인정보 보호와 보존을 지킬 의무를 가지고 있습니다. 귀하의 계정의 정보는 안전하게 처리되며, 비밀번호는 PHP 표준에 의거 hash 처리되어 보관됩니다. 또한 요청이 있을 경우, 신원 확인 후 즉시 개인정보를 폐기합니다.<br><br>
+
+                &nbsp;&nbsp;- 이 서비스에 저장되는 모든 정보는 관리자 이외에는 열람할 수 없으며, 관리자는 제3자에게 해당 개인정보를 공유하지 않음을 약속합니다.<br><br>
+
+                &nbsp;&nbsp;- 귀하는 본 사이트의 사용자로써, 게시판 등에서 활동시 선량하고 긍정적인 인터넷 문화를 만들어갈 책임이 있습니다. 댓글이나 방명록 작성, 기타 어떤 형태로도 무분별한 혐오 표현, 욕설, 광고, 음란물 게시, 모욕, 개인정보 유출과 같은 행위를 할 경우 실제 현행법에 의해 처벌받을 수 있으며 그 외 통보 없는 게시물 삭제 및 계정 영구 정지와 같은 별도 제재가 시행될 수 있으며, 해당 영구정지 기록은 반영구적으로 공개될 수 있습니다.<br><br>
+
+                &nbsp;&nbsp;- 본 사이트에 대한 게시글 도배 등 모든 형태의 서비스거부공격(DoS; Denial of Service)를 금지합니다. 해당 공격 발생 시, 호스팅사나 운영자에 의해 민형사상 책임을 물을 수 있습니다.<br><br>
+
+                &nbsp;&nbsp; - 본 사이트는 게시판 기능과 더불어 보안적인 측면도 고려하고 있기에, 이에 대한 상시 보안 점검은 환영합니다. 권한 탈취, EXP(경험치) 기능 악용, 오버플로우 등 모든 형태의 사이버 공격을 시도하실 수 있습니다. 단, 서비스거부공격과 관리자 권한 탈취 후 그 권한을 임의로 사용하는 행위, 탈취한 내용을 공공연히 배포하는 엄격히 금지합니다. 그 외 제안 사항, 잠재적 문제점 등에 대한 보고도 환영합니다.<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;- 제안 사항에는 현행 기능 개선 내용, 새로운 기능 요청 등이 포함됩니다.<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;- 잠재적 문제점에는 현행 기능에서의 구조적인 문제, 코드상 결함 등이 포함됩니다.<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;- 보안 취약점이나 문제점, 제안 사항 등은 agerio100@naver.com으로 이메일을 남겨주시거나 이 웹페이지의 Github(https://github.com/x3onkait/LoginLumesKR)에 Issue를 남겨 주시면 조치하겠습니다.<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;- 보안 취약점이나 문제점, 제안 사항 등을 보고하실 때, 사용하시는 login.lumes.kr 내 계정(ID와 등록된 이메일 주소)을 알려주시면 QA(Quality Assurance) 배지를 붙여드립니다.<br>
+
+                <br><br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;- Lumes Sage, 2022년 03월 06일 
+                </div>
+            </div>
+
             <div class="mt-5 col text-center">
                 <div class="g-recaptcha" data-sitekey="6LciGk8eAAAAAGwmpLhWQs7eGruJ7bqJK7q7Tph_"></div>
                 <button type="button" id="signup-button" class="btn btn-primary mb-3"
@@ -112,7 +144,6 @@
     </form>
 
     <script>
-        
         const signupForm = document.querySelector("#signup-form");
         const signupButton = document.querySelector("#signup-button");
         const id = document.querySelector("#id");
