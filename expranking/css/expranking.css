@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "lumes";
+    src: url("../../font/NanumSquareR.ttf");
+}
+
+@font-face {
+    font-family: "lumes";
+    src: url("../../font/SFProDisplay_regular.ttf");
+    unicode-range: U+30-39, U+41-5A, U+61-7A
+}
+
+@font-face {
+    font-family: "lumes";
+    src: url("../../font/Meiryo.ttf");
+    unicode-range: 	U+3041-3096, U+30A0-30FF, U+3400-4D85, U+4E00-9FC8, U+F900-FA6A, U+2E80-2FD5, U+FF5F-FF9F;
+}
+
+#navbar {
+    font-family: "lumes";
+}
+
+.ranking-table {
+    position:absolute; 
+    top: 15%; 
+    left:15%; 
+    width:70%;
+}
+
+table {
+    font-family: "lumes";
+}

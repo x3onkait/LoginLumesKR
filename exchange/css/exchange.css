@@ -1,0 +1,110 @@
+@font-face {
+    font-family: "lumes";
+    src: url("../../font/NanumSquareR.ttf");
+}
+
+@font-face {
+    font-family: "lumes";
+    src: url("../../font/SFProDisplay_regular.ttf");
+    unicode-range: U+30-39, U+41-5A, U+61-7A
+}
+
+#navbar {
+    font-family: "lumes";
+}
+
+.container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 25% 25% 25% 25%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "crypto-name-bar crypto-name-bar crypto-name-bar user-panel user-panel"
+        "trading-view trading-view trading-view user-panel user-panel"
+        "trading-view trading-view trading-view user-panel user-panel"
+        "additional-info additional-info additional-info user-panel user-panel";
+
+    /* grid-column-gap: 20px;
+    grid-row-gap: 20px;
+
+    justify-items: stretch;
+    align-items: stretch; */
+
+}
+
+.crypto-name-bar {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 50% 50%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "crypto-name crypto-name crypto-name crypto-name"
+        "crypto-price crypto-price crypto-price crypto-price";
+    grid-area: crypto-name-bar;
+
+    border: 1px solid whitesmoke;
+    box-shadow: 0px 0px 10px 0px gray;
+    border-radius: 10px;
+
+    margin-top: 30px;
+
+}
+
+.crypto-name {
+    font-family: "lumes";
+    margin-left: 10px;
+    grid-area: crypto-name;
+}
+
+.crypto-price {
+    font-family: "lumes";
+    margin-left: 10px;
+    grid-area: crypto-price;
+}
+
+.trading-view {
+    grid-area: trading-view;
+}
+
+.additional-info {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50%;
+    grid-auto-columns: 50%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "my-asset market-depth-graph";
+    grid-area: additional-info;
+}
+
+.market-depth-graph {
+    grid-area: market-depth-graph;
+}
+
+.my-asset {
+    grid-area: my-asset;
+}
+
+.user-panel {
+    display: grid;
+    grid-template-columns: 50%;
+    grid-template-rows: 60% 40%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "user-buy-sell-panel"
+        "user-crypto-selection-bar";
+    grid-area: user-panel;
+}
+
+.user-buy-sell-panel {
+    grid-area: user-buy-sell-panel;
+}
+
+.user-crypto-selection-bar {
+    grid-area: user-crypto-selection-bar;
+}

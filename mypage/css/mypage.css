@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "lumes";
+    src: url("../../font/NanumSquareR.ttf");
+}
+
+@font-face {
+    font-family: "lumes";
+    src: url("../../font/SFProDisplay_regular.ttf");
+    unicode-range: U+30-39, U+41-5A, U+61-7A
+}
+
+@font-face {
+    font-family: "lumes";
+    src: url("../../font/Meiryo.ttf");
+    unicode-range: 	U+3041-3096, U+30A0-30FF, U+3400-4D85, U+4E00-9FC8, U+F900-FA6A, U+2E80-2FD5, U+FF5F-FF9F;
+}
+
+#navbar {
+    font-family: "lumes";
+}
+
+body {
+    font-family: "lumes";
+}
+
+table {
+    font-family: "lumes";
+}
+
+#userInformationTable {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 15%;
+    width: 70%;
+}
+
+#changeInformationForm {
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+#changePasswordForm {
+    width: 400px;
+    margin-right: 20px;
+}
+
+#changeNicknameForm {
+   width: 400px;
+}
+
+#sendExpForm {
+    font-family: "lumes";
+    margin: auto;
+    padding-top: 40px;
+    width: 55%;
+}
