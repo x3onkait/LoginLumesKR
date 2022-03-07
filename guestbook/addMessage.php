@@ -29,6 +29,9 @@ if (isset($_SESSION['id'])) {
     // 공백(whitespace)이 있는 문자열도 허용하지 않음...
     $comment = trim(addslashes(htmlspecialchars($_POST['comment'])));
 
+    // 공백 필터링 우회 차단...
+    substr_replace("\u3000", "", $comment);
+
     if ($comment !== "") {
 
         // 빈 메시지는 이제 허용하지 않음
