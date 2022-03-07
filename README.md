@@ -7,7 +7,7 @@
 
 ### 데이터베이스 항목
 
-`guestbook` DB 구조 
+`guestbook` DB 구조 (사용자가 pagination이 적용된 게시판에 직접 글을 올릴 때, 해당 내용이 저장되는 데이터베이스.)
 ```sql
 CREATE TABLE IF NOT EXISTS `guestbook` (
   `idx` int(11) NOT NULL auto_increment,
@@ -19,17 +19,31 @@ CREATE TABLE IF NOT EXISTS `guestbook` (
   PRIMARY KEY  (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8
 ```
+- idx : (auto_increment 적용) 게시글 유 번호
+- writer_id : 게시글 작성자의 ID
+- writer_nickname : 게시글 작성자의 닉네임
+- comment : 게시글 내용(본문)
+- date : 게시글 작성 날짜
+- role : 게시글 작성자의 역할(Admin - 관리자 / QA - Quality Assurance 등..)
 
-`member` DB 구조
+`member` DB 구조 (본 웹페이지에 가입하는 사용자들의 정보가 저장되는 데이터베이스.)
 ```sql
 CREATE TABLE IF NOT EXISTS `member` (
   `idx` int(20) NOT NULL auto_increment,
   `id` varchar(30) NOT NULL,
   `nickname` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL COMMENT 'login.lumes.kr 멤버들 목록',
+  `email` varchar(255) NOT NULL,
   `exp` int(20) NOT NULL default '100',
   `role` varchar(30) NOT NULL,
   PRIMARY KEY  (`idx`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8
 ```
+- idx : (auto_increment 적용) 유저 고유 번호
+- id : 유저 ID
+- nickname : 유저 닉네임
+- password : 유저 패스워드 (PHP의 표준 내장 함수에 따라 hash처리됨.)
+- email : 유저 이메일 주소
+- exp : 유저 경험치
+- role : 유저 역할(Admin - 관리자 / QA - Quality Assurance 등..)
+
