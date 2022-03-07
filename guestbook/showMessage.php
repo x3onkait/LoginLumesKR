@@ -14,31 +14,6 @@ $start_from = ($page - 1) * $limit;
 $result_with_limit = mysqli_query($conn, "SELECT * FROM guestbook ORDER BY idx DESC LIMIT {$start_from}, {$limit}");
 
 
-while ($row = mysqli_fetch_array($result_with_limit)) {
-    echo '<tr style="max-width: 400px">';
-
-    if ($row['role'] === "Admin") {
-        echo '<th class="table-primary" scope="col" style="text-align: center;">' . $row['idx'] . '</th>';
-        echo '<th class="table-primary" scope="col" style="text-align: center; width: 15%;">' . $row['writer_id'] . ' (' . $row['writer_nickname'] . ')' . '&nbsp;<span class="badge badge-pill badge-primary">Admin</span>' . '</th>';
-        echo '<th class="table-primary" scope="col" style="width: 50%">' . $row['comment'] . '</th>';
-        echo '<th class="table-primary" scope="col" style="text-align: center;">' . $row['date'] . '</th>';
-    }
-    else if ($row['role'] === "QA") {
-        echo '<th scope="col" style="text-align: center;">' . $row['idx'] . '</th>';
-        echo '<th scope="col" scope="col" style="text-align: center; width: 15%;">' . $row['writer_id'] . ' (' . $row['writer_nickname'] . ')' . '&nbsp;<span class="badge bg-dark" style="color: white;">QA</span>' . '</th>';
-        echo '<th scope="col" style="width: 50%">' . $row['comment'] . '</th>';
-        echo '<th scope="col" style="text-align: center;">' . $row['date'] . '</th>';
-    }
-    else {
-        echo '<th scope="col" style="text-align: center;">' . $row['idx'] . '</th>';
-        echo '<th scope="col" style="text-align: center; width: 15%;">' . $row['writer_id'] . ' (' . $row['writer_nickname'] . ')' . '</th>';
-        echo '<th scope="col" style="width: 50%">' . $row['comment'] . '</th>';
-        echo '<th scope="col" style="text-align: center;">' . $row['date'] . '</th>';
-    }
-
-    echo '</tr>';
-}
-
 $totalPage = intval(ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM guestbook")) / $limit));        // 표시 가능한 총 페이지 개수
 
 // 페이지네이션 선택 바 (유저들이 클릭해서 보는 부분)
@@ -96,3 +71,55 @@ echo '<div style="margin-top: 60px;">';
 echo '</div>';
 
 ?> 
+
+<div style="position:relative; top: 40px;">
+        <table class="table" style="table-layout: fixed; width: 100%">
+            <colgroup>
+                <col width="10%" /> 
+                <col width="15%" /> 
+                <col width="60%" /> 
+                <col width="15%" /> 
+            </colgroup>
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" style="text-align: center;">메시지 번호</th>
+                    <th scope="col" style="text-align: center;">작성자 ID</th>
+                    <th scope="col" style="text-align: center;" style="width:700px;">메시지 (최근 100개)</th>
+                    <th scope="col" style="text-align: center;">작성시간</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <?php
+
+                while ($row = mysqli_fetch_array($result_with_limit)) {
+                    echo '<tr>';
+
+                    if ($row['role'] === "Admin") {
+                        echo '<td class="table-primary" scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
+                        echo '<th class="table-primary" scope="col" style="text-align: center;">' . $row['writer_id'] . ' (' . $row['writer_nickname'] . ')' . '&nbsp;<span class="badge badge-pill badge-primary">Admin</span>' . '</th>';
+                        echo '<td class="table-primary" scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
+                        echo '<td class="table-primary" scope="col" style="text-align: center;">' . $row['date'] . '</td>';
+                    }
+                    else if ($row['role'] === "QA") {
+                        echo '<td scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
+                        echo '<th scope="col" style="text-align: center;">' . $row['writer_id'] . ' (' . $row['writer_nickname'] . ')' . '&nbsp;<span class="badge bg-dark" style="color: white;">QA</span>' . '</th>';
+                        echo '<td scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
+                        echo '<td scope="col" style="text-align: center;">' . $row['date'] . '</td>';
+                    }
+                    else {
+                        echo '<td scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
+                        echo '<th scope="col" style="text-align: center;">' . $row['writer_id'] . ' (' . $row['writer_nickname'] . ')' . '</th>';
+                        echo '<td scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
+                        echo '<td scope="col" style="text-align: center;">' . $row['date'] . '</td>';
+                    }
+
+                    echo '</tr>';
+                }
+
+                ?>
+                
+            </tbody>
+        </table>
+    </div>

@@ -32,22 +32,7 @@
 
     </form>
 
-    <div style="position:relative; top: 40px;">
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col" style="text-align: center;">메시지 번호</th>
-                    <th scope="col" style="text-align: center;">작성자 ID</th>
-                    <th scope="col" style="text-align: center;">메시지 (최근 100개)</th>
-                    <th scope="col" style="text-align: center;">작성시간</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php include("showMessage.php") ?>
-            </tbody>
-        </table>
-    </div>
+    <?php include("showMessage.php") ?>
 
 
 </div>
