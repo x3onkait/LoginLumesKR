@@ -26,7 +26,8 @@ session_start();
 
 if (isset($_SESSION['id'])) {
 
-    $comment = addslashes(htmlspecialchars($_POST['comment']));
+    // 공백(whitespace)이 있는 문자열도 허용하지 않음...
+    $comment = trim(addslashes(htmlspecialchars($_POST['comment'])));
 
     if ($comment !== "") {
 
