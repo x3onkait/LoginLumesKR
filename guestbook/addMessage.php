@@ -30,7 +30,14 @@ if (isset($_SESSION['id'])) {
     $comment = trim(addslashes(htmlspecialchars($_POST['comment'])));
 
     // 공백 필터링 우회 차단...
-    substr_replace("\u3000", "", $comment);
+    $comment = str_replace("​ ", "", $comment);                // U+0020 차단
+    $comment = str_replace("　", "", $comment);                // U+3000 차단
+    $comment = str_replace("​", "", $comment);                 // U+200B 차단
+    $comment = str_replace("ᅟ", "", $comment);                  // U+115F 차단
+    $comment = str_replace("ᅠ", "", $comment);                  // U+1160 차단
+    $comment = str_replace("ㅤ", "", $comment);                 // U+3164 차단
+    $comment = str_replace("ﾠ", "", $comment);                  // U+FFA0 차단
+    $comment = str_replace("⠀", "", $comment);                  // U+2280 차단
 
     if ($comment !== "") {
 
@@ -131,7 +138,7 @@ if (isset($_SESSION['id'])) {
             icon: 'error',
             title: 'ERROR',
             text: '메시지가 없네요...',
-            footer: '메시지를 입력하고 전송하기를 시도하세요!'
+            footer: '메시지를 입력하고 전송하기를 시도하세요! 공백만 입력하는 것은 허용되지 않으며, 공백을 우회하기 위해 전각 공백 등을 사용하는 것도 금지됩니다.'
         }).then((result) => {
             location.href = "../index.php";
         });
