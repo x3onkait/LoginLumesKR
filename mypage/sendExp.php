@@ -105,7 +105,21 @@
                 $loseMyExpAmount        = mysqli_query($conn, "UPDATE member SET exp = exp - '$sendExpAmount' WHERE id = '$id'");
                 $gainTargetExpAmount    = mysqli_query($conn, "UPDATE member SET exp = exp + '$sendExpAmount' WHERE id = '$sendExpTarget'");
 
-                if($loseMyExpAmount === false || $gainTargetExpAmount === false) {
+                // 송금 기록 남기기
+                // date_default_timezone_set("Asia/Seoul");
+
+                $t = microtime(true);
+                $micro = sprintf("%06d", ($t - floor($t)) * 1000000);
+                $d = new DateTime(date('Y-m-d H:i:s.' . $micro, $t));
+                $date = $d->format("Y-m-d H:i:s.u");
+
+                $type                   = "TRANSFER";
+                $transaction_number_source = $type . $id . $sendExpTarget . $sendExpAmount . $date;
+                $transaction_number     = hash("sha256", $transaction_number_source);
+                $makeTransactionLog     = mysqli_query($conn, "INSERT INTO exp_transactions (transaction_number, type, source, target, amount, date) 
+                                                        VALUES ('$transaction_number', '$type', '$id', '$sendExpTarget', '$sendExpAmount', '$date') ");
+
+                if($loseMyExpAmount === false || $gainTargetExpAmount === false || $makeTransactionLog === false) {
 
                     ?>
 
@@ -114,7 +128,7 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'UNEXPECTED!',
-                            text: 'EXP 송금에 실패했습니다.',
+                            text: 'EXP 송금 또는 송금 기록에 문제가 생겼습니다.',
                             footer: '관리자에게 문의하세요.'
                         }).then((result) => {
                             Swal.fire({
