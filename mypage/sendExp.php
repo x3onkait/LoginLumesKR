@@ -30,6 +30,28 @@
     $sendExpTarget = $_POST['sendExpTarget'];
     $sendExpAmount = (int)$_POST['sendExpAmount'];
 
+    if($id === $sendExpTarget) {
+
+        // Client-side 검증 우회로 경험치를 오히려 "채우려는" 경우
+        ?>
+
+            <script>
+                Swal.fire({
+                    icon: 'question',
+                    title: 'Why...?',
+                    text: '자기 자신에게 송금하시나요?',
+                    footer: '안타깝지만 아무런 EXP 잔고의 변화가 일어나지는 않습니다.'
+                }).then((result) => {
+                    location.href = "./mypage.php";
+                })
+            </script>
+
+        <?php
+
+        die();
+
+    }
+
     if($sendExpAmount < 0) {
         
         // Client-side 검증 우회로 경험치를 오히려 "채우려는" 경우
