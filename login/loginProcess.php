@@ -77,21 +77,47 @@
     } else {
     // 로그인 실패
     
-    ?>
 
-    <script>
+        if($hashedPassword === "redacted") {
+            // 영구 정지된 계정
+            // 영구 정지되면 해시된 패스워드가 있어야 할 자리에는 "redacted"로 대체됨 (수동.)
 
-        Swal.fire({
-            icon: 'error',
-            title: '잘못된 정보',
-            text: '로그인 정보가 없거나 잘못되었습니다.'
-        }).then((result) => {
-            location.href = "./login.php";
-        })
+            ?>
 
-    </script>
+            <script>
 
-<?php
+                Swal.fire({
+                    icon: 'error',
+                    title: '로그인 불가',
+                    text: '계정이 영구 정지되었습니다.',
+                    footer: '계정 복구 등에 대한 문의가 있으시면 관리자에게 연락하세요.'
+                }).then((result) => {
+                    location.href = "./login.php";
+                })
+
+            </script>
+
+            <?php
+
+        } else {
+            // 그냥 로그인이 틀린 계정
+
+            ?>
+
+            <script>
+
+                Swal.fire({
+                    icon: 'error',
+                    title: '잘못된 정보',
+                    text: '로그인 정보가 없거나 잘못되었습니다.'
+                }).then((result) => {
+                    location.href = "./login.php";
+                })
+
+            </script>
+
+            <?php
+        }
 
     }
 

@@ -88,8 +88,7 @@ if ($jsonResponse->success === true) {
 
             <?php
 
-        }
-        else {
+        } else {
 
             ?>
 
