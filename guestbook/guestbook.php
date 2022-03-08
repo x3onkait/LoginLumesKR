@@ -17,7 +17,7 @@
                         </button></div>
                 <div class="progress" style="width: 250px">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" id="counterProgressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>';
+                </div>
 
                 <script type="text/javascript" src="guestbook/js/guestbookTextCounter.js"></script>
 

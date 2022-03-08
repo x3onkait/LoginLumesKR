@@ -134,7 +134,7 @@ if (isset($_SESSION['id'])) {
                         icon: 'error',
                         title: 'UNEXPECTED!',
                         text: '에러!!',
-                        footer: '경험치 누적에 문제가 생겼습니다.'
+                        footer: '경험치 누적 또는 시간 기록에 문제가 생겼습니다.'
                     }).then((result) => {
                         Swal.fire({
                             icon: 'info',
