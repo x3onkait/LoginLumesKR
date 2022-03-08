@@ -153,14 +153,17 @@
 
                     <script>
 
+                        let amount = <?php echo $sendExpAmount ?>;
+
                         Swal.fire({
                             icon: 'success',
                             title: 'OK',
                             text: 'EXP 송금이 완료되었습니다.',
-                            footer: '<b>' + <?php echo $sendExpAmount ?> + 'EXP가 송금됐습니다!</b>'
+                            footer: '<b>' + amount.toLocaleString('ko-KR') + ' EXP가 송금됐습니다! </b>'
+                                          
                         }).then((result) => {
                             location.href = "./mypage.php";
-                        })
+                        });
 
                     </script>
 
