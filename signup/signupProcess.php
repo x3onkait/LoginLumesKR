@@ -66,8 +66,11 @@ if ($jsonResponse->success === true) {
         $nickname = $_POST['nickname'];
         $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
+        date_default_timezone_set("Asia/Seoul");
+        $last_activity_time = date("Y-m-d H:i:s");
+
         // role은 유저의 역할을 나타냄. 관리자는 Admin, Quality Assessment를 담당하면 QA 등으로 관리자가 별도로 지정하지 않는 한 기본값 user
-        $query = "INSERT INTO member (id, nickname, password, email, exp, role) VALUES('$id', '$nickname', '$hashedPassword', '$email', 100, 'user')";
+        $query = "INSERT INTO member (id, nickname, password, email, exp, role, last_activity_time) VALUES('$id', '$nickname', '$hashedPassword', '$email', 100, 'user', '$last_activity_time')";
 
         $result = mysqli_query($conn, $query);
 

@@ -48,9 +48,38 @@ if (isset($_SESSION['id'])) {
         $writer_nickname = $_SESSION['nickname'];
         $writer_role = $_SESSION['role'];
 
-        // 경험치는 데이터베이스에서...
-        $writer_exp_db_result = mysqli_fetch_array(mysqli_query($conn, "SELECT exp FROM member WHERE id = '$writer_id'"));
+        // 경험치는 데이터베이스에서.
+        // 도배를 막기 위해 마지막 활동 시간을 가져와 2초 이내에 글을 또 올리려고 시도하는지도 가져온다.
+        $writer_exp_db_result = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM member WHERE id = '$writer_id'"));
         $writer_exp = $writer_exp_db_result['exp'];
+        $writer_last_activity_time = $writer_exp_db_result['last_activity_time'];
+
+        // 마지막으로 글을 올린 시간과 비교하여 글을 올리는 간격 (초)
+        // 4초 간격 이내로 매우 짧게 글을 다시 계속해서 올릴려고 하는 경우 차단
+        date_default_timezone_set("Asia/Seoul");
+        $writer_activity_interval = strtotime(date('Y-m-d H:i:s')) - strtotime($writer_last_activity_time);
+        if($writer_activity_interval < 4) {
+
+            ?>
+
+            <script>
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ERROR',
+                    text: '과도한 요청 탐지',
+                    footer: '<b>무분별한 도배 행위를 막기 위해, 게시글은 개당 최소 4초 이상의 간격을 두고 올리셔야 합니다. 조금 진정하세요.</b>'
+                }).then((result) => {
+                    location.href = "../index.php";
+                });
+
+            </script>
+
+            <?php
+
+            die();
+
+        }
 
         $t = microtime(true);
         $micro = sprintf("%06d", ($t - floor($t)) * 1000000);
@@ -93,9 +122,10 @@ if (isset($_SESSION['id'])) {
 
             $add_exp = rand(500, 800);
             $writer_exp += $add_exp;
-            $query = "UPDATE member SET exp = '$writer_exp' WHERE id = '$writer_id'";
-            $result = mysqli_query($conn, $query);
-            if ($result === false) {
+            $current_time = date("Y-m-d H:i:s");
+            $result_exp_db_update                = mysqli_query($conn, "UPDATE member SET exp = '$writer_exp' WHERE id = '$writer_id'");
+            $result_last_acitvity_time_db_update = mysqli_query($conn, "UPDATE member SET last_activity_time = '$current_time'");
+            if ($result_exp_db_update === false || $result_last_acitvity_time_db_update === false) {
 
                 ?>
 
@@ -162,7 +192,7 @@ if (isset($_SESSION['id'])) {
         text: '누구시죠?',
         footer: '아니, 로그인부터 하고 글을 적으시라구요!'
     }).then((result) => {
-        echo '<script>location.href = "../index.php";</script>'
+        location.href = "../index.php";
     });
 
     </script>
