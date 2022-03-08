@@ -69,7 +69,12 @@
     <script>
         function requireReCAPTCHA() {
             if (grecaptcha.getResponse() === "") {
-                alert("ReCAPTCHA를 체크해주세요.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ReCAPTCHA...?',
+                    text: '리캡챠 확인을 해 주세요!',
+                    footer: '자동가입을 방지하기 위해 ReCAPTCHA를 사용하는 중입니다.'
+                })
                 return false;
             } else {
                 return true;
