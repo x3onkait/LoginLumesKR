@@ -29,6 +29,7 @@
             </ul>
 
             <?php
+            
                         if (isset($_SESSION['id'])) {
 
 
@@ -39,11 +40,35 @@
                         $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
                         
                         $id = $_SESSION['id'];
-                        $query = "SELECT exp FROM member where id='$id'";
+                        $query = "SELECT * FROM member where id='$id'";
                         
                         $result = mysqli_fetch_array(mysqli_query($conn, $query));
 
                         $exp = $result['exp'];
+
+                        // 중간에 계정 정지당한 경우
+                        if($result['password'] === "redacted") {
+
+                            ?>
+
+                                <script>
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: '계정 영구 정지 알림',
+                                    text: '',
+                                    footer: '심각한 수준의 서비스 정책 위반이 확인되어 계정이 영구 정지되었습니다.'
+                                }).then((result) => {
+                                    location.href = "./logout/logoutProcess.php";
+                                });
+
+                            </script>
+
+                            <?php
+
+                            die();
+
+                        }
 
                     ?>
 
