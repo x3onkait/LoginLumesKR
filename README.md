@@ -36,8 +36,9 @@ CREATE TABLE IF NOT EXISTS `member` (
   `email` varchar(255) NOT NULL,
   `exp` int(20) NOT NULL default '100',
   `role` varchar(30) NOT NULL,
+  `last_activity_time` datetime NOT NULL,
   PRIMARY KEY  (`idx`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 ```
 - idx : (auto_increment 적용) 유저 고유 번호
 - id : 유저 ID
@@ -46,4 +47,5 @@ CREATE TABLE IF NOT EXISTS `member` (
 - email : 유저 이메일 주소
 - exp : 유저 경험치
 - role : 유저 역할(Admin - 관리자 / QA - Quality Assurance 등..)
+- last_activity_time : 유저의 마지막 활동 시간. 정확하게는 게시글을 올린 마지막 시간(초 단위)으로, 이를 기반으로 도배 시도 여부를 판단하고 필터링을 실시함.
 
