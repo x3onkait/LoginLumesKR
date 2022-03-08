@@ -1,3 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN.LUMES.KR</title>
+    <link rel="stylesheet" href="./css/mypage.css">
+    <link rel="shortcut icon" href="/favicon/logo.png">
+
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- end of sweetalert -->
+
+</head>
+
+<body>
+    <!-- 프로세스 처리 구간이라서 굳이 뭘 할 건 없음. -->
+</body>
+
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
@@ -51,23 +72,58 @@ if ($jsonResponse->success === true) {
         $result = mysqli_query($conn, $query);
 
         if ($result === false) {
-            echo "저장에 문제가 생겼습니다. 관리자에게 문의해주세요.";
-            echo mysqli_error($conn);
+
+            ?>
+
+            <script>
+                Swal.fire({
+                    icon : 'error',
+                    title : 'UNEXPECTED',
+                    text : '예기치 못한 문제가 발생했습니다.',
+                    footer : '다음 에러 메시지를 관리자에게 전해주세요. : ' + <?php mysqli_error($conn) ?>
+                }).then((result) => {
+                    location.href = "../index.php";
+                })
+            </script>
+
+            <?php
+
         }
         else {
-            echo '<script>';
-            echo 'alert("회원가입이 완료되었습니다");';
-            echo 'location.href = "../index.php"';
-            echo '</script>';
+
+            ?>
+
+            <script>
+                Swal.fire({
+                    icon : 'success',
+                    title : '반갑습니다!',
+                    text : '회원가입이 완료되었습니다.',
+                    footer : '로그인하여 서비스를 이용하실 수 있습니다.'
+                }).then((result) => {
+                    location.href = "../index.php";
+                })
+            </script>
+
+            <?php
+
         }
 
     } else {
 
-        // 중간에 값이 변조됨
-        echo '<script>';
-        echo 'alert("중간에 값이 변조된 것 같군요... 혹시 중복 가입을 시도하시는거라면.. 안 됩니다! 흥!");';
-        echo 'location.href = "../index.php"';
-        echo '</script>';
+        ?>
+
+            <script>
+                Swal.fire({
+                    icon : 'warning',
+                    title : 'ERROR!',
+                    text : '입력값 변조 의심',
+                    footer : '중복가입 시도는 허용되지 않습니다.'
+                }).then((result) => {
+                    location.href = "../index.php";
+                })
+            </script>
+
+        <?php
 
     }
 
@@ -75,10 +131,22 @@ if ($jsonResponse->success === true) {
 
 else {
     // ReCAPTCHA validation fail
-    echo '<script>';
-    echo 'alert("ReCAPTCHA 실패로 회원가입이 거부되었습니다. 자동화된 시도는 허용되지 않습니다.");';
-    echo 'location.href = "../index.php";';
-    echo '</script>';
+
+    ?>
+
+            <script>
+                Swal.fire({
+                    icon : 'error',
+                    title : 'ERROR!',
+                    text : '가입 실패',
+                    footer : '자동가입방지를 위한 ReCAPTCHA를 수행하여 로봇이 아님을 증명해주세요. 자동화된 가입은 허용되지 않습니다.'
+                }).then((result) => {
+                    location.href = "../index.php";
+                })
+            </script>
+
+    <?php
+
 }
 
 ?>

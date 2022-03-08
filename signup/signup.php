@@ -38,6 +38,10 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- end of Google ReCAPTCHA -->
 
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- end of sweetalert -->
+
 </head>
 
 <body>
@@ -154,19 +158,32 @@
 
         signupButton.addEventListener("click", function (e) {
 
-            if (id.getAttribute('data-isValidated') === "true" && email.getAttribute('data-isValidated') ===
-                "true") {
+            if (id.getAttribute('data-isValidated') === "true" && email.getAttribute('data-isValidated') === "true") {
                 if (nickname.value === "") {
-                    alert('닉네임을 입력해 주세요.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: '회원가입 오류',
+                        text: '닉네임을 입력해 주세요!'
+                    })
                 } else {
                     if (password.value && password.value === passwordCheck.value) {
                         signupForm.submit();
                     } else {
-                        alert("비밀번호가 서로 일치하지 않습니다.");
+                        Swal.fire({
+                            icon: 'error',
+                            title: '회원가입 오류',
+                            text: '비밀번호 불일치',
+                            footer: '비밀번호와 그 확인이 서로 일치해야 합니다. 제대로 입력하셨는지 확인해주세요.'
+                        })
                     }
                 }
             } else {
-                alert('ID와 이메일 검증을 해 주세요.');
+                Swal.fire({
+                    icon: 'error',
+                    title: '회원가입 오류',
+                    text: '검증 부재',
+                    footer: '아이디와 이메일 검증을 실시해 주세요!'
+                })
             }
         });
     </script>
