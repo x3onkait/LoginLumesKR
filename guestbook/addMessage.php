@@ -46,8 +46,11 @@ if (isset($_SESSION['id'])) {
 
         $writer_id = $_SESSION['id'];
         $writer_nickname = $_SESSION['nickname'];
-        $writer_exp = $_SESSION['exp'];
         $writer_role = $_SESSION['role'];
+
+        // 경험치는 데이터베이스에서...
+        $writer_exp_db_result = mysqli_fetch_array(mysqli_query($conn, "SELECT exp FROM member WHERE id = '$writer_id'"));
+        $writer_exp = $writer_exp_db_result['exp'];
 
         $t = microtime(true);
         $micro = sprintf("%06d", ($t - floor($t)) * 1000000);
@@ -118,8 +121,6 @@ if (isset($_SESSION['id'])) {
                 <?php
     
             }
-
-            $_SESSION['exp'] = $writer_exp;
 
             echo '<script>';
             echo 'location.href = "../index.php";';

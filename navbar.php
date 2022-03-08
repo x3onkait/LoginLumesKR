@@ -30,12 +30,27 @@
 
             <?php
                         if (isset($_SESSION['id'])) {
+
+
+                        // 경험치(exp)에 대한 내용은 세션과 데이터베이스 간 차이로부터 발생하는
+                        // 오류를 없애기 위해 무조건 DB에서 데이터를 그때그때 받아와서 사용
+                        header('Content-Type: text/html; charset=utf-8');
+
+                        $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+                        
+                        $id = $_SESSION['id'];
+                        $query = "SELECT exp FROM member where id='$id'";
+                        
+                        $result = mysqli_fetch_array(mysqli_query($conn, $query));
+
+                        $exp = $result['exp'];
+
                     ?>
 
             <div id="buttons-for-logged-user">
                 <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover"
                     id="exp" data-placement="bottom" title="성공적으로 로그인하셨어요!">
-                    경험치 : <?php echo number_format($_SESSION['exp']); ?> EXP
+                    경험치 : <?php echo number_format($exp); ?> EXP
                 </button>
                 <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover"
                     id="loggeduser" data-placement="bottom" title="성공적으로 로그인하셨어요!">

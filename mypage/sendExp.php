@@ -123,7 +123,6 @@
                             text: 'EXP 송금이 완료되었습니다.',
                             footer: '<b>' + <?php echo $sendExpAmount ?> + 'EXP가 송금됐습니다!</b>'
                         }).then((result) => {
-                            <?php $_SESSION['exp'] -= $sendExpAmount; ?>
                             location.href = "./mypage.php";
                         })
 

@@ -46,7 +46,6 @@
         session_start();
         $_SESSION['id'] = $row['id'];
         $_SESSION['nickname'] = $row['nickname'];
-        $_SESSION['exp'] = $row['exp'];
         $_SESSION['role'] = $row['role'];
 
         ?> 
