@@ -10,7 +10,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN.LUMES.KR</title>
-    <link rel="stylesheet" href="css/index.css">
     <link rel="shortcut icon" href="/favicon/logo.png">
 
     <!-- bootstrap -->
@@ -59,12 +58,24 @@
 
         $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
         
-        $query = "SELECT * FROM exp_transactions ORDER BY idx DESC LIMIT 100";
-        $result = mysqli_query($conn, $query);
+        $exp_transactions_result = mysqli_query($conn, "SELECT * FROM exp_transactions ORDER BY idx DESC LIMIT 100");
+        $exp_transactions_accumulation = mysqli_fetch_array(mysqli_query($conn, "SELECT sum(amount) FROM exp_transactions"));
 
         $exp_unit = '&nbsp;<span style="color: gray">EXP</span>';
 
+        
         echo '<h4 style="text-align: center; margin-top: 40px;"><b>EXP 거래 기록</b></h4>';
+        
+
+        // 총 거래량 통계 및 거래 찾기
+        echo '<div class="d-flex justify-content-center">';
+            echo '<button type="button" class="btn btn-info" style="text-align: center; margin-right: 10px;">총 거래량 : ' . number_format($exp_transactions_accumulation['sum(amount)']) . ' EXP</button>';
+            echo '<button type="button" class="btn btn-danger" onclick="findTransaction()">거래 찾기</button>';
+        echo '</div>';
+
+        ?>
+
+        <?php
 
         echo '<div class="exp-transactions-table">';
             echo '<table class="table" id="exp_transaction_table">';
@@ -81,7 +92,7 @@
 
             echo '<tbody>';
 
-        while($row = mysqli_fetch_array($result)) {
+        while($row = mysqli_fetch_array($exp_transactions_result)) {
 
                 echo '<tr>';
 
@@ -109,67 +120,57 @@
 
     ?>
 
+    <script src="./siteactivity_help.js"></script>
+
 </body>
 
 <script>
 
-    // TRANSACTION 도움말
+    async function findTransaction() {
+        
+        const { value: transactionHexID } = await Swal.fire({
+            title: '거래 조회',
+            icon: 'info',
+            input: 'textarea',
+            inputLabel: 'Message',
+            inputPlaceholder: '거래 ID',
+            inputAttributes: {
+                'aria-label': '거래 ID'
+            },
+            confirmButtonText: '조회하기',
+            showCancelButton: true,
+            cancelButtonText: '취소',
+            footer: '16진수로 된 거래 ID를 입력해주세요.',
 
-    function explain_TRANSFER(){
-        Swal.fire({
-            icon: 'question',
-            title: '도움말',
-            text: 'TRANSFER',
-            footer: '<b>사용자 간 마이페이지의 EXP 송금 기능을 통해 EXP를 주고받은 경우에 해당하는 거래 종류입니다.'
-                    + '따라서 EXP를 준 유저(FROM)와 받은 유저(TO)가 반드시 존재합니다.</b>'
         })
+
+        if (transactionHexID) {
+            // transaction ID는 16진수
+            if(isHex("0x" + transactionHexID) === true && transactionHexID.length === 64){
+
+                location.href = "./findTransaction.php?transaction_number=" + transactionHexID;
+
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '형식 오류',
+                    text: '거래 ID가 올바르지 않습니다.',
+                    footer: '<b>거래 ID는 연속된 64자리의 16진수로 이루어져 있습니다.</b>'
+                })
+            }
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: ':(',
+                text: '거래 ID를 입력해 주세요.'
+            })
+        }
+
     }
 
-    function explain_ID(){
-        Swal.fire({
-            icon: 'question',
-            title: '도움말',
-            text: 'ID',
-            footer: '<b>송수신측간 이루어진 거래에 대한 정보를 한 문자열로 취합하여 SHA256처리한 고유 거래 번호입니다.'
-                    + 'sha256($거래타입 + $송신자ID + $수신자ID + $거래량(정수) + $거래일시(Y-m-d H:i:s.u));와 같이 저장됩니다.' 
-                    + '자세한 내용은 Github에 올라간 공개 코드를 참조해주세요.</b>'
-        })
+    function isHex(num) {
+        return Boolean(num.match(/^0x[0-9a-f]+$/i))
     }
-
-    function explain_TRANSACTION_TIME(){
-        Swal.fire({
-            icon: 'question',
-            title: '도움말',
-            text: 'DATE',
-            footer: '<b>당사자 간 거래가 성사된 일시입니다.</b>'
-        })
-    }
-
-    function explain_FROM(){
-        Swal.fire({
-            icon: 'question',
-            title: '도움말',
-            text: 'FROM',
-            footer: '<b>EXP를 송금한 사람의 ID입니다.</b>'
-        })
-    }
-
-    function explain_TO(){
-        Swal.fire({
-            icon: 'question',
-            title: '도움말',
-            text: 'FROM',
-            footer: '<b>EXP를 송금받은 사람의 ID입니다.</b>'
-        })
-    }
-
-    function explain_AMOUNT(){
-        Swal.fire({
-            icon: 'question',
-            title: '도움말',
-            text: 'AMOUNT',
-            footer: '<b>송금한 EXP의 양입니다. 최소단위는 1EXP이며 양의 정수입니다.</b>'
-        })
-    }
-
+        
 </script>
