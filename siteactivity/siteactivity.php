@@ -70,7 +70,7 @@
         // 총 거래량 통계 및 거래 찾기
         echo '<div class="d-flex justify-content-center">';
             echo '<button type="button" class="btn btn-info" style="text-align: center; margin-right: 10px;">총 거래량 : ' . number_format($exp_transactions_accumulation['sum(amount)']) . ' EXP</button>';
-            echo '<button type="button" class="btn btn-danger" onclick="findTransaction()">거래 찾기</button>';
+            echo '<button type="button" class="btn btn-danger" onclick="findTransaction()">거래 조회하기</button>';
         echo '</div>';
 
         ?>
@@ -133,14 +133,14 @@
             icon: 'info',
             input: 'textarea',
             inputLabel: 'Message',
-            inputPlaceholder: '거래 ID',
+            inputPlaceholder: '거래 ID (ex. a8d910a233f8afc9...)',
             inputAttributes: {
                 'aria-label': '거래 ID'
             },
             confirmButtonText: '조회하기',
             showCancelButton: true,
             cancelButtonText: '취소',
-            footer: '16진수로 된 거래 ID를 입력해주세요.',
+            footer: '16진수로 된 64글자 길이의 거래 ID를 입력해주세요.',
 
         })
 
