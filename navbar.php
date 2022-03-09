@@ -90,7 +90,7 @@
                 </button>
             </div>
 
-            <script src="./navbar_toastr.js"></script>
+            <script src="/navbar_toastr.js"></script>
 
             
 
