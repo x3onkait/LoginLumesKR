@@ -103,6 +103,7 @@
                     
                     echo '<th scope="col" style="text-align: center;">' 
                             . '<h5><span class="badge badge-light" onclick="explain_ID()">' . $row['transaction_number'] . '</span></h5>' 
+                            . '<button type="button" class="btn btn-primary btn-sm" style="margin-right: 20px;" onclick="copy(\'' . $row['transaction_number'] . '\')">ID 복사</button>'
                             . '<span class="badge badge-dark" onclick="explain_TRANSACTION_TIME()">Transaction Date : ' . $row['date'] . '</span></th>';
 
                     echo '<th scope="col" style="text-align: center;" onclick="explain_FROM()">' . $row['source'] . '</th>';
@@ -171,6 +172,22 @@
 
     function isHex(num) {
         return Boolean(num.match(/^0x[0-9a-f]+$/i))
+    }
+
+    // 클립보드에 복사
+    function copyToClipboard(val) {
+        const t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = val;
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+    }
+
+    function copy(copy_string) {
+        copyToClipboard(copy_string);
+        toastr["success"](copy_string, "거래ID가 클립보드에 복사됨");
+
     }
         
 </script>
