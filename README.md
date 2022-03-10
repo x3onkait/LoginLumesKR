@@ -28,6 +28,47 @@
 
 * * *
 
+### 데이터베이스 관리
+
+ - 이 프로젝트는 데이터베이스 연결을 할 때 필요한 데이터들을 한 파일(`dbconnection.php`)에 지정하고 연결 변수인 `$conn`을 다른 파일들이 필요할 때 `require()`를 통해 불러오도록 하고 있습니다. 아래 파일 내용을 필요한대로 내용을 바꾼 다음 최상위 디렉터리에 `dbconnection.php` 란 이름으로 저장해서 사용해 주세요. 보안적인 측면을 고려하여, 비록 제작자와 같이 `localhost`로 해둔다면 사실상 데이터베이스에 접근할 방법이 마땅치 않지만, 그럼에도 불구하고 보안적인 면을 고려하면 좋겠다는 의견이 있어서 이렇게 분리하게 되었습니다. 해당 파일은 `.gitignore`에 등록되어 repository에는 별도로 등록되지 않습니다.
+
+```php
+<?php
+
+    // MYSQL 데이터베이스 로그인 및 DB 이름 정보를 한 파일에 통합해서 관리
+
+
+    $servername = "_NAME_";
+    $dbusername = "_DATABASE_USER_NAME_";
+    $dbpassword = "_DATABASE_USER_PASSWORD_";
+    $dbname     = "_DATABASE_NAME_";
+
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+
+    if ($conn -> connect_error) {
+
+        die("Connection failed: " . $conn -> connect_error);
+    
+    }
+
+?>
+```
+
+사용 예시) 
+```php
+    header('Content-Type: text/html; charset=utf-8');
+
+    // DB connection
+    require(dirname(__FILE__) . "/../../dbconnection.php");
+
+    $email = $_GET['email'];
+
+    $query = "SELECT * FROM member WHERE email = '$email'";
+    $row   = mysqli_fetch_array(mysqli_query($conn, $query));
+```
+
+* * *
+
 ### 데이터베이스 항목
 
 - 이 웹페이지는 웹 서비스로서, 사용자들의 정보들을 저장하고 관리하기 위한 데이터베이스 운영이 필요합니다. 
