@@ -54,7 +54,7 @@
         $verify_email_contents .= "<table style='height: 60px; width: 206px; border-collapse: collapse; margin-left: auto; margin-right: auto;' border='1'>";
         $verify_email_contents .=   "<tbody>";
         $verify_email_contents .=       "<tr style='height: 19px;'>";
-        $verify_email_contents .=           "<td style='width: 202px; height: 19px; text-align: center;'><strong>인증 키</strong></td>";
+        $verify_email_contents .=           "<td style='width: 202px; height: 19px; text-align: center;'><strong>인증 코드</strong></td>";
         $verify_email_contents .=       "</tr>";
         $verify_email_contents .=       "<tr style='height: 19px;'>";
         $verify_email_contents .=           "<td style='width: 202px; height: 19px; text-align: center;'>" . $verify_email_authkey . "</td>";

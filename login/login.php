@@ -77,7 +77,7 @@
             <!-- 로그인 정보 찾기 -->
             <div id="findLoginInfoButtonGroup">
                 <button type="button" onclick="location.href = './findLoginInfo/findID.php'" class="btn btn-secondary mb-3">아이디 찾기</button>
-                <button type="button" onclick="location.href = './findLoginInfo/findPassword.php'" class="btn btn-secondary mb-3">비밀번호 찾기</button>
+                <button type="button" onclick="location.href = './findLoginInfo/findPassword.html'" class="btn btn-secondary mb-3">비밀번호 찾기</button>
             </div>
 
         </div>
