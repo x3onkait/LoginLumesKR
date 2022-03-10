@@ -1,4 +1,10 @@
 # LoginLumesKR
+ <p align = "center">
+  <img src="https://img.shields.io/github/languages/code-size/x3onkait/LoginLumesKR">
+  <img src="https://img.shields.io/tokei/lines/github/x3onkait/LoginLumesKR">
+  <img src="https://img.shields.io/github/languages/top/x3onkait/LoginLumesKR">
+  <img src="https://img.shields.io/website?down_color=lightgray&down_message=offline&up_color=blue&up_message=online&url=http%3A%2F%2Flogin.lumes.kr">
+ </p>
  로그인, 회원가입, 게시글 작성, 포인트 제도 등 잡다하게 들어가 있는 게시판 웹 서비스입니다.  
  사용 가능하고 어느정도 테스팅이 끝나 사용 가능한 항목들은  
  [login.lumes.kr](http://login.lumes.kr)에 접속하셔서 사용하실 수 있습니다(개발자가 호스팅 중).
