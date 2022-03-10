@@ -55,7 +55,7 @@
 
     // 클라이언트에서 중간에 값을 가로채서 JS 인증을 우회하려는 경우 이를 탐지하고 거래를 거절.
 
-    if(is_numeric($sendExpAmount) !== false || $sendExpAmount <= 0) {
+    if(is_numeric($sendExpAmount) === false || $sendExpAmount <= 0) {
 
         // Client-side 검증 우회로 경험치를 오히려 "채우려는" 경우
         ?>
