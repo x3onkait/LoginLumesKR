@@ -24,7 +24,8 @@
     session_start();
     header('Content-Type: text/html; charset=utf-8');
 
-    $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+    // DB connection
+    require(dirname(__FILE__) . "/../dbconnection.php");
 
     $id = $_SESSION['id'];
     $currentNickname = $_POST['current-nickname'];

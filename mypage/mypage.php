@@ -48,7 +48,11 @@
     <!-- get some current user information and show that -->
     <?php
 
-            $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+            
+            // DB connection
+            require(dirname(__FILE__) . "/../dbconnection.php");
+            
+
             $query = "SELECT * FROM member WHERE id = '" . $_SESSION['id'] . "'";
             $userInformation = mysqli_fetch_array(mysqli_query($conn, $query));
 

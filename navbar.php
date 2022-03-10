@@ -30,47 +30,49 @@
 
             <?php
             
-                        if (isset($_SESSION['id'])) {
+                if (isset($_SESSION['id'])) {
 
 
-                        // 경험치(exp)에 대한 내용은 세션과 데이터베이스 간 차이로부터 발생하는
-                        // 오류를 없애기 위해 무조건 DB에서 데이터를 그때그때 받아와서 사용
-                        header('Content-Type: text/html; charset=utf-8');
+                // 경험치(exp)에 대한 내용은 세션과 데이터베이스 간 차이로부터 발생하는
+                // 오류를 없애기 위해 무조건 DB에서 데이터를 그때그때 받아와서 사용
+                header('Content-Type: text/html; charset=utf-8');
 
-                        $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
-                        
-                        $id = $_SESSION['id'];
-                        $query = "SELECT * FROM member where id='$id'";
-                        
-                        $result = mysqli_fetch_array(mysqli_query($conn, $query));
+                // DB connection
+                // DB connection
+                require(dirname(__FILE__) . "/dbconnection.php");
+                
+                $id = $_SESSION['id'];
+                $query = "SELECT * FROM member where id='$id'";
+                
+                $result = mysqli_fetch_array(mysqli_query($conn, $query));
 
-                        $exp = $result['exp'];
+                $exp = $result['exp'];
 
-                        // 중간에 계정 정지당한 경우
-                        if($result['password'] === "redacted") {
-
-                            ?>
-
-                                <script>
-
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: '계정 영구 정지 알림',
-                                    text: '',
-                                    footer: '심각한 수준의 서비스 정책 위반이 확인되어 계정이 영구 정지되었습니다.'
-                                }).then((result) => {
-                                    location.href = "./logout/logoutProcess.php";
-                                });
-
-                            </script>
-
-                            <?php
-
-                            die();
-
-                        }
+                // 중간에 계정 정지당한 경우
+                if($result['password'] === "redacted") {
 
                     ?>
+
+                        <script>
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: '계정 영구 정지 알림',
+                            text: '',
+                            footer: '심각한 수준의 서비스 정책 위반이 확인되어 계정이 영구 정지되었습니다.'
+                        }).then((result) => {
+                            location.href = "./logout/logoutProcess.php";
+                        });
+
+                    </script>
+
+                    <?php
+
+                    die();
+
+                }
+
+            ?>
 
             <div id="buttons-for-logged-user">
                 <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover"
@@ -90,7 +92,55 @@
                 </button>
             </div>
 
-            <script src="/navbar_toastr.js"></script>
+            <script>
+
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "3000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+
+                $("#loggeduser").on("click", function () {
+                    toastr["success"]("<?php echo $_SESSION['id']; ?>님으로 로그인 되어 있어요.", "로그인됨");
+                });
+
+                $("#exp").on("click", function () {
+                    toastr["success"]("방명록에 댓글을 남기시면 개당 500EXP ~ 800EXP의 경험치를 드려요!", "EXP");
+                });
+
+                $("#logout").on("click", function () {
+                    Swal.fire({
+                        title: "정말로 로그아웃 하실건가요?",
+                        text: "원하신다면 언제든지 다시 로그인하세요!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '로그아웃 진행',
+                        cancelButtonText: '취소'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'See you soon!',
+                                '로그아웃 되었습니다.',
+                                'success'
+                            ).then(() => location.href = "/logout/logoutProcess.php");
+                        }
+                    });
+                });
+
+            </script>
 
             
 

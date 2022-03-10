@@ -37,7 +37,8 @@
 
 <?php
 
-    $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+    // DB connection
+    require(dirname(__FILE__) . "/../dbconnection.php");
 
     $transaction_number = $_GET['transaction_number'];
 

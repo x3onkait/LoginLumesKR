@@ -49,7 +49,9 @@ $jsonResponse = json_decode($response);
 
 if ($jsonResponse->success === true) {
     // ReCAPTCHA validation successful
-    $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+    
+    // DB connection
+    require(dirname(__FILE__) . "/../dbconnection.php");
 
     $id = $_POST['id'];
     $email = $_POST['email'];

@@ -37,7 +37,8 @@
 
     }else{
 
-        $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+        // DB connection
+        require(dirname(__FILE__) . "/../dbconnection.php");    
     
         $query = "SELECT * FROM member WHERE email ='{$email}'";
 

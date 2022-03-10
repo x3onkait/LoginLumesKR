@@ -56,7 +56,8 @@
 
     <?php
 
-        $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+        // DB connection
+        require(dirname(__FILE__) . "/../dbconnection.php");
         
         $exp_transactions_result = mysqli_query($conn, "SELECT * FROM exp_transactions ORDER BY idx DESC LIMIT 100");
         $exp_transactions_accumulation = mysqli_fetch_array(mysqli_query($conn, "SELECT sum(amount) FROM exp_transactions"));

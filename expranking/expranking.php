@@ -46,7 +46,8 @@
 
     <?php
 
-        $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+        // DB connection
+        require(dirname(__FILE__) . "/../dbconnection.php");
 
         $query = "SELECT * FROM member ORDER BY exp DESC LIMIT 100";
         $result = mysqli_query($conn, $query);

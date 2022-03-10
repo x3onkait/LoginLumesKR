@@ -42,7 +42,9 @@ if (isset($_SESSION['id'])) {
     if ($comment !== "") {
 
         // 빈 메시지는 이제 허용하지 않음
-        $conn = mysqli_connect("localhost", "luminous", "alphatrox2048@@", "luminous");
+        
+        // DB connection
+        require(dirname(__FILE__) . "/../dbconnection.php");
 
         $writer_id = $_SESSION['id'];
         $writer_nickname = $_SESSION['nickname'];
