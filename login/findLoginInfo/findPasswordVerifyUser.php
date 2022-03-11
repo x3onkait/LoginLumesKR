@@ -34,6 +34,27 @@
 
     if($row) {
 
+        if($row['password'] === "redacted") {
+
+            ?>
+
+            <script>
+                Swal.fire({
+                    icon : 'error',
+                    title : 'DENIED',
+                    text : '영구정지된 계정',
+                    footer : '해당 계정 복구에 대해서는 관리자에게 직접 문의하셔야 합니다.'
+                }).then((result) => {
+                    location.href = "../login.php";
+                })
+            </script>
+
+            <?php
+
+            die();
+
+        }
+
         $requested_user_id = $row['id'];
 
         // 계정 존재
