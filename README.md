@@ -1,5 +1,6 @@
 # LoginLumesKR
  <p align = "center">
+  <img src="https://img.shields.io/github/workflow/status/x3onkait/LoginLumesKR/CodeQL">
   <img src="https://img.shields.io/github/languages/code-size/x3onkait/LoginLumesKR">
   <img src="https://img.shields.io/tokei/lines/github/x3onkait/LoginLumesKR">
   <img src="https://img.shields.io/github/languages/top/x3onkait/LoginLumesKR">
