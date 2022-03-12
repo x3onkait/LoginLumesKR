@@ -19,7 +19,7 @@ $result_with_limit = mysqli_query($conn, "SELECT * FROM guestbook ORDER BY idx D
 $totalPage = intval(ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM guestbook")) / $limit));        // 표시 가능한 총 페이지 개수
 
 // 페이지네이션 선택 바 (유저들이 클릭해서 보는 부분)
-echo '<div style="margin-top: 60px;">';
+echo '<div style="margin-top: 60px;" id="messagePaginationBar">';
     echo '<ul class="pagination justify-content-center">';
 
         echo '<li class="page-item">';
@@ -74,7 +74,14 @@ echo '</div>';
 
 ?> 
 
-<div style="position:relative; top: 40px;">
+<div style="position:relative; top: 20px;" id="messageTable">
+
+        <!-- auto refresh notifier -->
+        <div class="d-flex align-items-center">
+            <strong>📜 게시판은 3초에 한 번씩 새로고침 됩니다...&nbsp;&nbsp;&nbsp;</strong>
+            <div class="spinner-border spinner-border-sm ms-auto" role="status" aria-hidden="true"></div>
+        </div>
+
         <table class="table" style="table-layout: fixed; width: 100%">
             <colgroup>
                 <col width="10%" /> 
@@ -125,3 +132,20 @@ echo '</div>';
             </tbody>
         </table>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+
+        window.onload = function reloadPage() {
+
+            setInterval(function(){
+                // https://stackoverflow.com/questions/18490026/refresh-reload-the-content-in-div-using-jquery-ajax
+                $("#messagePaginationBar").load(location.href + " #messagePaginationBar");
+                $("#messageTable").load(location.href + " #messageTable");
+            }, 3000);
+            
+
+        }
+
+    </script>
