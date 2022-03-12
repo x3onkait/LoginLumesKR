@@ -157,6 +157,23 @@
         <button type="submit" class="btn btn-primary mb-2" id="sendExpAmountSubmitButton">송금하기</button>
     </form>
 
+    <?php
+
+        // 어드민을 위한 특별(!) 페이지
+        if($_SESSION['role'] === "Admin") {
+
+            ?>
+
+                <link rel="stylesheet" href="./admin/css/mypageForAdmin.css">
+
+            <?php
+
+            include("./admin/mypageForAdmin.html");
+
+        }
+
+    ?>
+
 
 </body>
 

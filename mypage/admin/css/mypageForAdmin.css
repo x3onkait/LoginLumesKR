@@ -1,0 +1,42 @@
+@font-face {
+    font-family: "lumes";
+    src: url("../../../font/NanumSquareR.ttf");
+}
+
+@font-face {
+    font-family: "lumes";
+    src: url("../../../font/SFProDisplay_regular.ttf");
+    unicode-range: U+30-39, U+41-5A, U+61-7A
+}
+
+@font-face {
+    font-family: "lumes";
+    src: url("../../../font/Meiryo.ttf");
+    unicode-range: 	U+3041-3096, U+30A0-30FF, U+3400-4D85, U+4E00-9FC8, U+F900-FA6A, U+2E80-2FD5, U+FF5F-FF9F;
+}
+
+body {
+    font-family: "lumes";
+}
+
+table {
+    font-family: "lumes";
+}
+
+#administratorIndicator {
+    position: relative;
+    margin-top: 100px;
+    text-align: center;
+    font-family: "lumes";
+}
+
+#adminActionForm {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 23%;
+    width: 54%;
+}
+
+#giveExpAmountForm {
+    margin-right: 50px;
+}
