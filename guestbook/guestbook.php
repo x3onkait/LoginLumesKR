@@ -10,7 +10,7 @@
                 ?>
 
                 <input class="form-control" name="id" type="text" placeholder="<?php echo $_SESSION['id'] ?>" readonly>
-                <textarea class="form-control" name="comment" onkeypress="submitWithShortcut(event)" id="userComment" rows="3" style="margin-bottom: 10px;" placeholder="도배, 서비스 거부 공격(DoS) 시도, 인신공격, 모욕, 욕설, 비방, 개인정보 유출, 기타 여러 사용자에게 불쾌감을 주는 등의 게시글을 올리는 행위는 법적 처벌의 대상이 될 수 있으며 통보 없이 게시글이 제거되거나 계정이 (영구)정지될 수 있습니다. / ~1,000 바이트까지..."></textarea>
+                <textarea class="form-control" name="comment" onkeypress="submitWithShortcut(event)" id="userComment" rows="3" style="margin-bottom: 10px;" autofocus placeholder="도배, 서비스 거부 공격(DoS) 시도, 인신공격, 모욕, 욕설, 비방, 개인정보 유출, 기타 여러 사용자에게 불쾌감을 주는 등의 게시글을 올리는 행위는 법적 처벌의 대상이 될 수 있으며 통보 없이 게시글이 제거되거나 계정이 (영구)정지될 수 있습니다. / ~1,000 바이트까지..."></textarea>
 
                 <div class="float-right"><button type="submit" id="addUserCommentButton" class="btn btn-primary">메시지 작성하기</button></div>
                 <div class="float-right"><button type="button" class="mx-2 btn btn-info">
