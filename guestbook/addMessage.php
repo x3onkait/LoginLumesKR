@@ -60,7 +60,7 @@ if (isset($_SESSION['id'])) {
         // 4초 간격 이내로 매우 짧게 글을 다시 계속해서 올릴려고 하는 경우 차단
         date_default_timezone_set("Asia/Seoul");
         $writer_activity_interval = strtotime(date('Y-m-d H:i:s')) - strtotime($writer_last_activity_time);
-        if($writer_activity_interval < 4) {
+        if($writer_activity_interval < 2) {
 
             ?>
 
@@ -70,7 +70,7 @@ if (isset($_SESSION['id'])) {
                     icon: 'error',
                     title: 'ERROR',
                     text: '과도한 요청 탐지',
-                    footer: '<b>무분별한 도배 행위를 막기 위해, 게시글은 개당 최소 4초 이상의 간격을 두고 올리셔야 합니다. 조금 진정하세요.</b>'
+                    footer: '<b>무분별한 도배 행위를 막기 위해, 게시글은 개당 최소 2초 이상의 간격을 두고 올리셔야 합니다. 조금 진정하세요.</b>'
                 }).then((result) => {
                     location.href = "../index.php";
                 });
