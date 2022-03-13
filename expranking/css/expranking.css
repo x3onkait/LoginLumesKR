@@ -20,7 +20,8 @@
 }
 
 .ranking-table {
-    position:absolute; 
+    position:relative; 
+    margin-top: 50px;
     top: 15%; 
     left:15%; 
     width:70%;
@@ -28,4 +29,12 @@
 
 table {
     font-family: "lumes";
+}
+
+#expranking-bar-chart-horizontal {
+    position: relative;
+    margin-top: 15px;
+    top: 15px;
+    left: 27%;
+    width: 1000px;
 }

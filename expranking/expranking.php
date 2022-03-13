@@ -38,6 +38,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- end of sweetalert -->
 
+    <!-- chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- end of chart.js -->
+
 </head>
 
 <body>
@@ -45,6 +49,8 @@
     <?php include("../navbar.php") ?>
 
     <?php
+
+        echo '<canvas id="expranking-bar-chart-horizontal" width="600" height="250"></canvas>';
 
         // DB connection
         require(dirname(__FILE__) . "/../dbconnection.php");
@@ -79,7 +85,7 @@
             echo '<th scope="col" style="text-align: center;">' . number_format($validated_users_count['count(*)']) . ' / ' . number_format($terminated_users_count['count(*)']) . '</th>';
             echo '<th scope="col" style="text-align: center;">' . number_format($validated_users_exp_sum['sum(exp)']) . $exp_unit . '</th>';
         echo '</tr>';
-        
+        echo '</div>';
 
         // ranking table overall this website
         // echo '<div style="position:relative; top: 40px;">';
@@ -94,7 +100,16 @@
                     echo '</tr>';
                 echo '</thead>';
 
+        // 차트를 그리기 위해 배열 형태로 데이터 모으기
+        $exprankingUsernameData = "[";
+        $exprankingUserExpamountData = "[";
+
         while($row = mysqli_fetch_array($result)){
+
+            if($rank_indicator <= 10){
+                $exprankingUsernameData .= "\"" . $row['id'] . "\"" . ",";
+                $exprankingUserExpamountData .= $row['exp'] . ",";
+            }
 
             echo '<tr>';
 
@@ -133,14 +148,66 @@
 
             }
 
-            
-
+            $exprankingUsernameData .= "]";
+            $exprankingUserExpamountData .= "]";
         
 
         echo '</table>';
     echo '</div>';
-        
 
     ?>
 
 </body>
+
+<script>
+
+    Chart.defaults.global.defaultFontFamily = "lumes";
+
+    new Chart(document.getElementById("expranking-bar-chart-horizontal"), {
+        type: 'horizontalBar',
+        data: {
+        labels: <?php echo $exprankingUsernameData ?>,
+        datasets: [
+            {
+                label: "EXP",
+                backgroundColor: ["#C33764", "#B53565","#A73567","#913268","#722F6B", "#5F2D6C", "#4B2A6D", "#4B2A6D", "#2F286F", "#1D2671"],
+                data: <?php echo $exprankingUserExpamountData ?>
+            }
+        ]
+        },
+        options: {
+            responsive: false,
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'EXP 랭킹 상위 10위',
+            },
+            scales: {
+                xAxes: [
+                    {
+                        ticks: {
+                            callback: function(label, index, labels) {
+                                // SI suffix에 맞춘 포맷팅
+                                if(label >= 100000000000){
+                                    return label / 100000000000 + 'T';
+                                } else if(label >= 1000000000) {
+                                    return label / 1000000000 + 'G';
+                                } else if(label >= 1000000) {
+                                    return label / 1000000 + 'M';
+                                } else if(label >= 1000) {
+                                    return label / 1000 + 'K';
+                                }
+                                
+                            }
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: '1k = 1천 / 1M : 1백만 / 1G : 10억 / 1T : 1조'
+                        }
+                    }
+                ]
+            }
+        }
+    });
+
+</script>
