@@ -89,15 +89,17 @@ CREATE TABLE IF NOT EXISTS `guestbook` (
   `writer_nickname` varchar(30) NOT NULL COMMENT '게시글 작성자 닉네임(이름)',
   `comment` varchar(1000) NOT NULL COMMENT '게시글 내용',
   `date` datetime NOT NULL COMMENT '게시글 작성 날짜',
+  `ip` varchar(40) default NULL COMMENT '작성 당시에 사용된 IPv4주소',
   `role` varchar(30) NOT NULL COMMENT '게시글 작성자의 역할',
   PRIMARY KEY  (`idx`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3960 ;
 ```
 - idx : (auto_increment 적용) 게시글 유 번호
 - writer_id : 게시글 작성자의 ID
 - writer_nickname : 게시글 작성자의 닉네임
 - comment : 게시글 내용(본문)
 - date : 게시글 작성 날짜
+- ip : 게시글을 작성한 당시 사용자(로그인된 사용자)의 공인IP (`$_server['REMOTE_ADDR']`)
 - role : 게시글 작성자의 역할(Admin - 관리자 / QA - Quality Assurance 등..)
 
 `member` DB 구조 (본 웹페이지에 가입하는 사용자들의 정보가 저장되는 데이터베이스.)
