@@ -57,6 +57,7 @@
             $userInformation = mysqli_fetch_array(mysqli_query($conn, $query));
 
             $exp_unit = '&nbsp;<span style="color: gray">EXP</span>';
+            $qty_unit = '&nbsp;<span style="color: gray">개</span>';
 
             echo '<table class="table" id="userInformationTable">';
                 echo '<thead class="thead-dark">';
@@ -65,6 +66,7 @@
                         echo '<th scope="col" style="text-align: center">이메일</th>';
                         echo '<th scope="col" style="text-align: center">닉네임</th>';
                         echo '<th scope="col" style="text-align: center">보유 경험치</th>';
+                        echo '<th scope="col" style="text-align: center">올린 게시글</th>';
                     echo '</tr>';
                 echo '</thead>';
             
@@ -74,6 +76,7 @@
                         echo '<td style="text-align: center">' . $userInformation['email'] . '</td>';
                         echo '<td style="text-align: center">' . $userInformation['nickname'] . '</td>';
                         echo '<td style="text-align: center">' . number_format($userInformation['exp']) . ' ' . $exp_unit .'</td>';
+                        echo '<td style="text-align: center">' . number_format($userInformation['guestbookQty']) . ' ' . $qty_unit .'</td>';
                     echo '</tr>';
                 echo '</tbody>';
             echo '</table>';

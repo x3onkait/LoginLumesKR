@@ -129,9 +129,13 @@ if (isset($_SESSION['id'])) {
             $add_exp = rand(500, 800);
             $writer_exp += $add_exp;
             $current_time = date("Y-m-d H:i:s");
-            $result_exp_db_update                = mysqli_query($conn, "UPDATE member SET exp = '$writer_exp' WHERE id = '$writer_id'");
-            $result_last_acitvity_time_db_update = mysqli_query($conn, "UPDATE member SET last_activity_time = '$current_time' WHERE id = '$writer_id'");
-            if ($result_exp_db_update === false || $result_last_acitvity_time_db_update === false) {
+            $result_member_db_update = mysqli_query($conn, "UPDATE member 
+                                                            SET exp = '$writer_exp', 
+                                                                guestbookQty = guestbookQty + 1,
+                                                                last_activity_time = '$current_time' 
+                                                            WHERE id = '$writer_id'");
+                                                            
+            if ($result_member_db_update === false) {
 
                 ?>
 
@@ -140,7 +144,7 @@ if (isset($_SESSION['id'])) {
                         icon: 'error',
                         title: 'UNEXPECTED!',
                         text: '에러!!',
-                        footer: '경험치 누적 또는 시간 기록에 문제가 생겼습니다.'
+                        footer: 'DB 반영에 문제가 생겼습니다.'
                     }).then((result) => {
                         Swal.fire({
                             icon: 'info',
