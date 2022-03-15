@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `guestbook` (
   `ip` varchar(40) default NULL COMMENT '작성 당시에 사용된 IPv4주소',
   `role` varchar(30) NOT NULL COMMENT '게시글 작성자의 역할',
   PRIMARY KEY  (`idx`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3960 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 ```
 - idx : (auto_increment 적용) 게시글 유 번호
 - writer_id : 게시글 작성자의 ID
@@ -113,8 +113,9 @@ CREATE TABLE IF NOT EXISTS `member` (
   `exp` double NOT NULL default '100' COMMENT '유저의 경험치',
   `role` varchar(30) NOT NULL COMMENT '유저의 역할',
   `last_activity_time` datetime NOT NULL COMMENT '유저의 마지막 활동 시간(게시글 업로드 시간)',
+  `guestbookQty` int(11) NOT NULL default '0' COMMENT '사용자가 올린 게시글',
   PRIMARY KEY  (`idx`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 ```
 - idx : (auto_increment 적용) 유저 고유 번호
 - id : 유저 ID
@@ -124,6 +125,7 @@ CREATE TABLE IF NOT EXISTS `member` (
 - exp : 유저 경험치
 - role : 유저 역할(Admin - 관리자 / QA - Quality Assurance 등..)
 - last_activity_time : 유저의 마지막 활동 시간. 정확하게는 게시글을 올린 마지막 시간(초 단위)으로, 이를 기반으로 도배 시도 여부를 판단하고 필터링을 실시함.
+- guestbookQty : 이 사용자가 `guestbook`에 올린 게시글 총 개수
 
 `exp_transaction` DB 구조 (경험치를 주고받는 거래(transaction)에 대한 정보가 저장되는 데이터베이스)
 ```sql
