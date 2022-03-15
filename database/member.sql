@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- 호스트: localhost
--- 처리한 시간: 22-03-09 16:49
+-- 처리한 시간: 22-03-15 22:57
 -- 서버 버전: 5.0.96-log
 -- PHP 버전: 5.6.40
 
@@ -35,9 +35,6 @@ CREATE TABLE IF NOT EXISTS `member` (
   `exp` double NOT NULL default '100' COMMENT '유저의 경험치',
   `role` varchar(30) NOT NULL COMMENT '유저의 역할',
   `last_activity_time` datetime NOT NULL COMMENT '유저의 마지막 활동 시간(게시글 업로드 시간)',
+  `guestbookQty` int(11) NOT NULL default '0' COMMENT '사용자가 올린 게시글',
   PRIMARY KEY  (`idx`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
