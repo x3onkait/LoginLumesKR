@@ -100,6 +100,12 @@
                     if($row['type'] === "TRANSFER") {
                         echo '<th scope="col" style="text-align: center;">' . $row['idx'] . '<br>' 
                             . '<span class="badge badge-primary" onclick="explain_TRANSFER()">TRANSFER</span>' . '</th>';
+                    } else if($row['type'] === "GRANT") {
+                        echo '<th scope="col" style="text-align: center;">' . $row['idx'] . '<br>' 
+                            . '<span class="badge badge-success" onclick="explain_TRANSFER()">GRANT</span>' . '</th>';
+                    } else if($row['type'] === "DEPRIVE") {
+                        echo '<th scope="col" style="text-align: center;">' . $row['idx'] . '<br>' 
+                            . '<span class="badge badge-danger" onclick="explain_TRANSFER()">DEPRIVE</span>' . '</th>';
                     }
                     
                     echo '<th scope="col" style="text-align: center;">' 

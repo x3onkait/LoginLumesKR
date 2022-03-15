@@ -88,7 +88,27 @@ header('Content-Type: text/html; charset=utf-8');
             $query = "UPDATE member SET exp = exp + '$giveExpAmount' WHERE id = '$giveExpTarget'";
             $result = mysqli_query($conn, $query);
 
-            if($result === false) {
+            // 송금 기록 남기기 
+            date_default_timezone_set("Asia/Seoul");
+            $t = microtime(true);
+            $micro = sprintf("%06d", ($t - floor($t)) * 1000000);
+            $d = new DateTime(date('Y-m-d H:i:s.' . $micro, $t));
+            $date = $d->format("Y-m-d H:i:s.u");
+
+            if($giveExpAmount >= 0){
+                $type = "GRANT";
+            } else {
+                $type = "DEPRIVE";
+            }
+
+            $id = $_SESSION['id'];
+
+            $transaction_number_source = $type . $id . $giveExpTarget . $giveExpAmount . $date;
+            $transaction_number     = hash("sha256", $transaction_number_source);
+            $makeTransactionLog     = mysqli_query($conn, "INSERT INTO exp_transactions (transaction_number, type, source, target, amount, date) 
+                                                    VALUES ('$transaction_number', '$type', '$id', '$giveExpTarget', '$giveExpAmount', '$date') ");
+
+            if($result === false || $makeTransactionLog === false) {
 
 
                 // 작업 실패
@@ -98,12 +118,19 @@ header('Content-Type: text/html; charset=utf-8');
 
                         Swal.fire({
                             icon: 'error',
-                            title: 'ERROR',
-                            text: '실행 오류',
-                            footer: '아래 에러 메시지를 확인하세요 : ' + <?php echo mysqli_error($conn) ?> 
+                            title: 'UNEXPECTED!',
+                            text: 'EXP 송금 또는 송금 기록에 문제가 생겼습니다.',
+                            footer: '관리자에게 문의하세요.'
                         }).then((result) => {
-                            location.href = "../mypage.php";
-                        })
+                            Swal.fire({
+                                icon: 'info',
+                                title: '에러 메시지',
+                                text: '아래 에러 메시지를 관리자에게 보여주세요.',
+                                footer: <?php echo mysqli_error($conn) ?>
+                            }).then((result) => {
+                                location.href = "../mypage.php";
+                            });
+                        });
 
                     </script>
 
