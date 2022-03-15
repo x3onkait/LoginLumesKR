@@ -57,31 +57,32 @@ if (isset($_SESSION['id'])) {
         $writer_last_activity_time = $writer_exp_db_result['last_activity_time'];
 
         // 마지막으로 글을 올린 시간과 비교하여 글을 올리는 간격 (초)
-        // 4초 간격 이내로 매우 짧게 글을 다시 계속해서 올릴려고 하는 경우 차단
-        date_default_timezone_set("Asia/Seoul");
-        $writer_activity_interval = strtotime(date('Y-m-d H:i:s')) - strtotime($writer_last_activity_time);
-        if($writer_activity_interval < 2) {
+        // 2초 간격 이내로 매우 짧게 글을 다시 계속해서 올릴려고 하는 경우 차단
+        // 버그 발생한듯. 일단 불편하므로 비활성화
+        // date_default_timezone_set("Asia/Seoul");
+        // $writer_activity_interval = strtotime(date('Y-m-d H:i:s')) - strtotime($writer_last_activity_time);
+        // if($writer_activity_interval < 2) {
 
-            ?>
+        ?>
 
-            <script>
+        <script>
 
-                Swal.fire({
-                    icon: 'error',
-                    title: 'ERROR',
-                    text: '과도한 요청 탐지',
-                    footer: '<b>무분별한 도배 행위를 막기 위해, 게시글은 개당 최소 2초 이상의 간격을 두고 올리셔야 합니다. 조금 진정하세요.</b>'
-                }).then((result) => {
-                    location.href = "../index.php";
-                });
+        //         Swal.fire({
+        //             icon: 'error',
+        //             title: 'ERROR',
+        //             text: '과도한 요청 탐지',
+        //             footer: '<b>무분별한 도배 행위를 막기 위해, 게시글은 개당 최소 2초 이상의 간격을 두고 올리셔야 합니다. 조금 진정하세요.</b>'
+        //         }).then((result) => {
+        //             location.href = "../index.php";
+        //         });
 
-            </script>
+        </script>
 
-            <?php
+        <?php
 
-            die();
+        //     die();
 
-        }
+        // }
 
         $t = microtime(true);
         $micro = sprintf("%06d", ($t - floor($t)) * 1000000);
