@@ -83,7 +83,31 @@
     </script>
 
     <form action="signupProcess.php" method="POST" id="signup-form" onsubmit="return requireReCAPTCHA()">
+
         <div class="w-50 ml-auto mr-auto mt-5">
+
+            <!-- 회원가입 전 주의사항 -->
+            <p>
+                <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    ★ 회원가입 전 필독(주의사항) ★
+                </button>
+            </p>
+            <div class="collapse" id="collapseExample" id="warningBeforeSignUp">
+                <div class="card card-body border-danger">
+                &nbsp;본 login.lumes.kr 서비스는 회원약관에 명시된 것과 같이 모욕성 발언을 포함한 일반적인 네티켓(인터넷 예절)을 심각하게 위반하는 행위를 금지하고 있습니다. <br>
+                &nbsp;그러나, 최근 성남OOO과O고등학교 일부 학생(사용자)들이 이 게시판을 통해서 특정인을 타겟으로 한 사이버불링(cyberbulling)으로 간주될 수 있는 행위를 한 바가 확인되었습니다. <br>
+                &nbsp;본 사이트는 개발 과정에서 나타날 수 있는 보안 취약점이나 도배와 같은 사용상의 문제를 해결하거나 소소한 잡담 등을 하며 사용성을 개선하고 운용 방식을 개선하는데 그 목표가 있습니다. <br>
+                &nbsp;따라서 해당 사이트를 통해 위와 같은 행위를 할 시, 사용약관 위반을 통한 계정 영구 조치 및 EXP(경험치) 전면 몰수는 물론, 실제 민형사상 처벌 또는 사이버폭력(범죄)과 연관되어 처벌을 받을 수 있음을 유의하시기 바랍니다.
+                      당연히, 해당 내용에는 사이트 닉네임에서 가까운 사람들의 이름을 불쾌하게 변형하여 비꼬는 형태로 사용하는 것, 채팅에서 과도하게 불쾌감을 드러낼만한 비꼬는 표현을 사용하는 것도 포함됩니다. <br>
+                &nbsp;상황이 정리되어 게시판 운영이 정지될 때까지 별도의 관리자 허락이 없는 한, 해당 사건의 가해 측면과 관련없는 개발 및 순수 사용 위주의 사용자(@fudehzmffjq, @fnalsjtm, @acane, @yyor)를 제외한 "성남OOO과O고등학교" 학생들의 추가 가입 및 활동을 금지합니다. 이를 위반할 시 책임은 본인에게 있습니다.
+
+
+                <br><br><br>
+                &nbsp;&nbsp;- 웹페이지 개발&관리자 Lumes Sage, 2022년 03월 15일 
+                </div>
+            </div>
+
             <div class="mb-3 ">
                 <label for="id" class="form-label">ID</label>
                 <input name="id" type="text" class="form-control" id="id" placeholder="(~30 바이트)"

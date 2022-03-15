@@ -19,6 +19,11 @@
     font-family: "lumes";
 }
 
+#warningBeforeSignUp {
+    position: relative;
+    margin-bottom: 20px;
+}
+
 #signup-form {
     font-family: "lumes";
 }
