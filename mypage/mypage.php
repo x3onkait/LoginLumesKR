@@ -90,17 +90,17 @@
                         <div class="ml-auto mr-auto mt-2">
                             <div class="mb-3">
                                 <label for="current-password" class="form-label">현재 비밀번호</label>
-                                <input name="current-password" type="text" class="form-control" id="current-password"
+                                <input name="current-password" type="password" class="form-control" id="current-password"
                                     placeholder="현재 비밀번호를 입력해 주세요." data-isValidated="false">
                             </div>
                             <div class="mb-3">
                                 <label for="new-password" class="form-label">새로운 비밀번호</label>
-                                <input name="new-password" type="text" class="form-control" id="new-password"
-                                    placeholder="변경하실 비밀번호를 입력해 주세요." data-isValidated="false">
+                                <input name="new-password" type="password" class="form-control" id="new-password"
+                                    placeholder="변경하실 비밀번호를 입력해 주세요. (8자리 이상)" data-isValidated="false">
                             </div>
                             <div class="mb-3">
                                 <label for="new-password-check" class="form-label">새로운 비밀번호 (재입력)</label>
-                                <input name="new-password-check" type="text" class="form-control"
+                                <input name="new-password-check" type="password" class="form-control"
                                     id="new-password-check" placeholder="변경하실 비밀번호를 한번 더 입력해 주세요."
                                     data-isValidated="false">
                             </div>

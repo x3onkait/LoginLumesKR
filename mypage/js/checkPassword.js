@@ -16,22 +16,31 @@ changePasswordFormSubmitButton.addEventListener("click", function (e) {
                 footer: '재입력 항목과 내용이 정확해야 합니다.'
             })
         } else {
-            Swal.fire({
-                title: '비밀번호를 정말로...',
-                text: "바꿀까요?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: '아뇨...',
-                confirmButtonText: '네!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    changePasswordForm.action = "changePassword.php";
-                    changePasswordForm.method = "POST";
-                    changePasswordForm.submit();
-                }
-            })
+            if(newPassword.value.length < 8) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '정보 변경 오류',
+                    text: '비밀번호 안전도 미달',
+                    footer: '새로운 비밀번호로 변경하실 때, 최소 8자리 이상의 비밀번호를 설정해주세요.'
+                })
+            } else {
+                Swal.fire({
+                    title: '비밀번호를 정말로...',
+                    text: "바꿀까요?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: '아뇨...',
+                    confirmButtonText: '네!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        changePasswordForm.action = "changePassword.php";
+                        changePasswordForm.method = "POST";
+                        changePasswordForm.submit();
+                    }
+                })
+            }
         }
     } else {
         Swal.fire({

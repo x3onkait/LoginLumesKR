@@ -97,7 +97,7 @@
             </div>
             <div class="mb-3 ">
                 <label for="password" class="form-label">비밀번호</label>
-                <input name="password" type="password" class="form-control" id="password" placeholder="(~255 바이트)">
+                <input name="password" type="password" class="form-control" id="password" placeholder="(~255 바이트) | 8자리 이상">
             </div>
             <div class="mb-3 ">
                 <label for="passwordCheck" class="form-label">비밀번호 (재확인)</label>
@@ -172,7 +172,16 @@
                     })
                 } else {
                     if (password.value && password.value === passwordCheck.value) {
-                        signupForm.submit();
+                        if(password.value.length < 8) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '회원가입 오류',
+                                text: '비밀번호 안전도 미달',
+                                footer: '최소 8자리 이상의 비밀번호를 설정해주세요.'
+                            })
+                        } else {
+                            signupForm.submit();
+                        }
                     } else {
                         Swal.fire({
                             icon: 'error',
