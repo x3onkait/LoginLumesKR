@@ -89,8 +89,11 @@ if (isset($_SESSION['id'])) {
         $d = new DateTime(date('Y-m-d H:i:s.' . $micro, $t));
         $date = $d->format("Y-m-d H:i:s.u");
 
+        // IP 로그
+        $ip = $_SERVER['REMOTE_ADDR'];
+
             
-        $query = "INSERT INTO guestbook (writer_id, writer_nickname, comment, date, role) VALUES('$writer_id', '$writer_nickname' ,'$comment', '$date', '$writer_role')";
+        $query = "INSERT INTO guestbook (writer_id, writer_nickname, comment, date, ip, role) VALUES('$writer_id', '$writer_nickname' ,'$comment', '$date', '$ip', '$writer_role')";
         $result = mysqli_query($conn, $query);
 
         if ($result === false) {
