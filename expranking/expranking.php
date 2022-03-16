@@ -64,7 +64,7 @@
         $exp_unit = '&nbsp;<span style="color: gray">EXP</span>';
 
         // 별도의 사용자 통계
-        $validated_users_count   = mysqli_fetch_array(mysqli_query($conn, "SELECT count(*) FROM `member` WHERE exp > 0"));
+        $validated_users_count   = mysqli_fetch_array(mysqli_query($conn, "SELECT count(*) FROM `member` WHERE exp >= 0"));
         $terminated_users_count  = mysqli_fetch_array(mysqli_query($conn, "SELECT count(*) FROM `member` WHERE exp < 0"));
         $total_users_count       = $validated_users_count['count(*)'] + $terminated_users_count['count(*)'];
         $validated_users_exp_sum = mysqli_fetch_array(mysqli_query($conn, "SELECT sum(exp) FROM `member` WHERE exp > 0"));
