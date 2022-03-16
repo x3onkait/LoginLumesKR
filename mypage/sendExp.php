@@ -81,6 +81,28 @@
         $isTargetExists = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM member WHERE id = '$sendExpTarget'"));
 
         if($isTargetExists){
+
+            if($isTargetExists['password'] === "redacted") {
+                // 차단된 사용자에게 송금 금지
+
+                ?>
+
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ERROR',
+                        text: '거래가 유효하지 않음',
+                        footer: '현재 (영구)정지된 계정에는 송금을 할 수 없습니다.'
+                    }).then((result) => {
+                        location.href = "./mypage.php";
+                    })
+                </script>
+
+                <?php
+                
+                die();
+
+            }
             
             // 자기가 가진 EXP 범위 내에서 EXP를 보내려는지 검사
             $myExpAmount = mysqli_fetch_array(mysqli_query($conn, "SELECT exp FROM member WHERE id = '$id'"));
@@ -103,6 +125,8 @@
                 </script>
 
                 <?php
+
+                die();
 
             } else {
 
