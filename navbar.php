@@ -23,6 +23,9 @@
                 <li>
                     <a class="nav-link" href="/siteactivity/siteactivity.php">액티비티</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="/chat/chat.php">채팅</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">((절대 누를 수 없는 버튼))</a>
                 </li>
