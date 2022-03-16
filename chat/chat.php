@@ -56,7 +56,7 @@
         ?>
 
             <div id="title">
-                <h3>SNAP! LIVE CHATTING</h3>
+                <h3>CHATTING! under construction...</h3>
             </div>
 
             <!-- chatting 기능 (시작) -->
