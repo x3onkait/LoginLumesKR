@@ -99,6 +99,7 @@ header('Content-Type: text/html; charset=utf-8');
                 $type = "GRANT";
             } else {
                 $type = "DEPRIVE";
+                $giveExpAmount *= -1;       // 이것도 일종의 거래라고 보고 거래량에 합산시키도록 한다.
             }
 
             $id = $_SESSION['id'];
@@ -145,14 +146,22 @@ header('Content-Type: text/html; charset=utf-8');
 
                     <script>
 
-                        let target = "<?php echo $giveExpTarget ?>"
+                        let target = "<?php echo $giveExpTarget ?>";
+                        let transactionType = "<?php echo $type ?>"
                         let amount = <?php echo $giveExpAmount ?>;
+                        let message = "";
+
+                        if(transactionType === "GRANT"){
+                            message = '@<b>' + target + '&nbsp;</b>에게&nbsp; ' + '<b>' + amount.toLocaleString('ko-KR') + ' EXP</b>&nbsp;가 추가되었습니다!';
+                        }else{
+                            message = '@<b>' + target + '&nbsp;</b>에게&nbsp; ' + '<b> -' + amount.toLocaleString('ko-KR') + ' EXP</b>&nbsp;가 제거되었습니다!';
+                        }
 
                         Swal.fire({
                             icon: 'success',
                             title: 'OK',
                             text: 'EXP 수정 완료',
-                            footer: '@<b>' + target + '&nbsp;</b>에게&nbsp; ' + '<b>' + amount.toLocaleString('ko-KR') + ' EXP</b>&nbsp;가 추가(제거)되었습니다!'
+                            footer: message
                         }).then((result) => {
                             location.href = "../mypage.php";
                         });
