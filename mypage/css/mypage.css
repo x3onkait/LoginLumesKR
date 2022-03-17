@@ -39,6 +39,29 @@ table {
     margin-top: 40px;
 }
 
+#uploadUserProfilePictureForm {
+    margin-right: -70px;
+}
+
+#userSubmittedProfileImage {
+    width: 60%;
+}
+
+
+#uploadUserProfilePictureFormSubmitButton {
+    margin-left: 10px;
+    position: relative;
+}
+
+#profileImage {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 80px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
 #changePasswordForm {
     width: 400px;
     margin-right: 20px;

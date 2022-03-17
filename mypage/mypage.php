@@ -1,6 +1,8 @@
 <?php
    session_start();
    header('Content-Type: text/html; charset=utf-8');
+   header("Pragma: no-cache");
+   header("Cache-Control: no-store, no-cache, must-revalidate"); 
 ?>
 
 <!DOCTYPE html>
@@ -87,6 +89,42 @@
     <table id="changeInformationForm">
         <thead>
             <tr>
+                <!-- upload user's custom profile picture -->
+                <!-- action="uploadUserProfilePicture.php" -->
+                <td>
+                    <form id="uploadUserProfilePictureForm" enctype="multipart/form-data" onsubmit="return false;">
+                        <label for="formFile" class="form-label">프로필 사진을 업로드해 보세요. (1MB 이하)</label>
+                        <div class="form-inline form-group">
+                            <input class="form-control" type="file" name="profileImage" id="userSubmittedProfileImage">
+                            <button type="submit" class="btn btn-primary" id="uploadUserProfilePictureFormSubmitButton">업로드</button>    
+                        </div>
+                        
+                    </form>
+
+                    <?php 
+
+                        $id                     = $_SESSION['id'];
+                        $profilePicturePath     = "../_serverasset/_userProfilePictures/" . "profilePic_" . "$id" . ".jpg";
+                        $isProfilePictureExists = file_exists($profilePicturePath);
+                    
+                        if($isProfilePictureExists === true) {
+
+                            // 일부러 시간으로 랜덤값을 주어 기존의 캐시로 인해
+                            // 업데이트 분이 강제 새로고침을 해야 보이는 것을 방지
+                            $profilePicturePath .= "?t=" . time();      
+
+                            echo '<img id="profileImage" src="' . $profilePicturePath . '" alt="profilePicture">';
+
+                        } else {
+
+                            $defaultProfilePicturePath = "../_serverasset/_defaultProfilePictures/_defaultProfileImage.jpg";
+                            echo '<img id="profileImage" src="' . $defaultProfilePicturePath . '" alt="profilePicture">';
+
+                        }
+                    
+                    ?>
+
+                </td>
                 <td>
                     <!-- change current user's password -->
                     <form id="changePasswordForm" onsubmit="return false;">
@@ -180,8 +218,9 @@
 
 </body>
 
-<script type="text/javascript" src="./js/checkPassword.js"></script>
-<script type="text/javascript" src="./js/checkNickname.js"></script>
-<script type="text/javascript" src="./js/checkSendExp.js"></script>
+    <script type="text/javascript" src="./js/checkPassword.js"></script>
+    <script type="text/javascript" src="./js/checkNickname.js"></script>
+    <script type="text/javascript" src="./js/checkSendExp.js"></script>
+    <script type="text/javascript" src="./js/checkProfilePicture.js"></script>
 
 </html>
