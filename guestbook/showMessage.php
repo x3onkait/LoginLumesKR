@@ -93,7 +93,7 @@ echo '</div>';
             <thead class="thead-light">
                 <tr>
                     <th scope="col" style="text-align: center;">메시지 번호</th>
-                    <th scope="col" style=""></th>
+                    <th scope="col"></th>
                     <th scope="col" style="text-align: center;">작성자 ID</th>
                     <th scope="col" style="text-align: center;" style="width:700px;">메시지 (최근 100개)</th>
                     <th scope="col" style="text-align: center;">작성시간</th>
