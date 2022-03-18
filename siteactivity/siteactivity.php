@@ -58,8 +58,7 @@
 
         // DB connection
         require(dirname(__FILE__) . "/../dbconnection.php");
-        
-        $exp_transactions_result = mysqli_query($conn, "SELECT * FROM exp_transactions ORDER BY idx DESC LIMIT 100");
+
         $exp_transactions_accumulation = mysqli_fetch_array(mysqli_query($conn, "SELECT sum(amount) FROM exp_transactions"));
 
         $exp_unit = '&nbsp;<span style="color: gray">EXP</span>';
@@ -72,6 +71,74 @@
         echo '<div class="d-flex justify-content-center">';
             echo '<button type="button" class="btn btn-info" style="text-align: center; margin-right: 10px;">총 거래량 : ' . number_format($exp_transactions_accumulation['sum(amount)']) . ' EXP</button>';
             echo '<button type="button" class="btn btn-danger" onclick="findTransaction()">거래 조회하기</button>';
+        echo '</div>';
+
+        // 페이지네이션
+        $limit = 20;
+
+        if(isset($_GET["page"])){
+            $page = intval($_GET["page"]);
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+        $result_with_limit = mysqli_query($conn, "SELECT * FROM exp_transactions ORDER BY idx DESC LIMIT {$start_from}, {$limit}");
+
+        $totalPage = intval(ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM exp_transactions")) / $limit));        // 표시 가능한 총 페이지 개수
+
+        // 페이지네이션 선택 바 (유저들이 클릭해서 보는 부분)
+        echo '<div style="margin-top: 60px;" id="trnasactionViewPaginationBar">';
+        echo '<ul class="pagination justify-content-center">';
+
+            echo '<li class="page-item">';
+                echo '<a class="page-link" href="?page=1">맨 처음 페이지</a>';
+            echo '</li>';
+
+                // previous button
+                if($page === 1){
+                    // 맨 처음 페이지인 경우 이전 페이지 버튼 사용 불가
+                    echo '<li class="page-item disabled">';
+                        echo '<a class="page-link" href="#" tabindex="-1">이전 페이지</a>';
+                    echo '</li>';
+                }else{
+                    echo '<li class="page-item">';
+                        echo '<a class="page-link" href="?page='.($page - 1).'">이전 페이지</a>';
+                    echo '</li>';
+                }
+
+                // selection button
+                for($pageSequence = $page - 5; $pageSequence <= $page + 5; $pageSequence++){
+                    if($pageSequence < 1)
+                        continue;
+                    if($pageSequence === $page){
+                        echo '<li class="page-item active" aria-current="page">';
+                            echo '<a class="page-link" href="?page='.$pageSequence.'">'.$pageSequence.'</a>';
+                        echo '</li>';
+                    } else {
+                        echo '<li class="page-item"><a class="page-link" href="?page='.$pageSequence.'">'.$pageSequence.'</a></li>';
+                    }
+                    if($pageSequence >= $totalPage)
+                        break;
+                }
+
+                // next button
+                if($page === $totalPage){
+                    // 맨 마지막 페이지인 경우 다음 페이지 버튼 사용 불가
+                    echo '<li class="page-item disabled">';
+                        echo '<a class="page-link" href="#" tabindex="-1">다음 페이지</a>';
+                    echo '</li>';
+                } else {
+                    echo '<li class="page-item">';
+                        echo '<a class="page-link" href="?page='.($page + 1).'">다음 페이지</a>';
+                    echo '</li>';
+                }
+
+                echo '<li class="page-item">';
+                    echo '<a class="page-link" id="lastpage" href="?page='.($totalPage).'">마지막 페이지</a>';
+                echo '</li>';
+
+            echo '</ul>';
         echo '</div>';
 
         ?>
@@ -93,7 +160,7 @@
 
             echo '<tbody>';
 
-        while($row = mysqli_fetch_array($exp_transactions_result)) {
+        while($row = mysqli_fetch_array($result_with_limit)) {
 
                 echo '<tr>';
 
