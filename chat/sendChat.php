@@ -53,7 +53,7 @@
     $writer_nickname            = $_SESSION['nickname'];
     $writer_role                = $_SESSION['role'];
     $ip                         = $_SERVER['REMOTE_ADDR'];
-    $content                    = htmlspecialchars($_POST['userChatMessage']); 
+    $content                    = trim(addslashes(htmlspecialchars($_POST['userChatMessage']))); 
     $message_room               = "public";               // 일단 모두 공개 채팅방인 "public" 사용
                                                           // 나중에 따로 방을 만들게 되면 그때 분리하는 것으로 함.
 
