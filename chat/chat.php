@@ -61,47 +61,70 @@
 
             <!-- chatting 기능 (시작) -->
             <div class="container">
+                
+                <div class="chattingSelectionBar">
+                    #LIST
+                </div>
 
-                <div class="chattingSection"></div>
+                <div class="chattingTitle">
+                    #public
+                </div>
+
                 <div class="chattingContents">
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
-                    <h1> chatting contents... </h1> <br>
+                    
+                    <?php include("./showChatMessage.php") ?>
+
                 </div>
 
-                <div class="chattingUsername">
-                    <div class="input-group flex-nowrap">
-                        <span class="input-group-text" id="addon-wrapping">@</span>
-                        <input type="text" class="form-control" placeholder="Username"aria-describedby="addon-wrapping">
-                    </div>
-                </div>
+                <div class="chattingUserTypingForm">
 
-                <div class="chattingMessageInput">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="메시지를 입력해보세요..."aria-describedby="basic-addon2">
-                    </div>
-                </div>
+                    <form action="./sendChat.php" method="POST" id="chattingForm">
 
-                <div class="chattingMessageSend">
-                    <button type="submit" class="btn btn-primary" id="sendChatButton">전송</button>
+                        <div class="form-inline form-group">
+
+                            <div class="chattingUsername">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">@</span>
+                                    <input type="text" class="form-control" value="<?php echo $_SESSION['id'] ?>" placeholder="Username"aria-describedby="addon-wrapping" disabled>
+                                </div>
+                            </div>
+
+                            <div class="chattingMessageInput">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="userChatMessage" id="userChatMessage" placeholder="메시지를 입력해보세요..." aria-describedby="basic-addon2">
+                                </div>
+                            </div>
+
+                            <div class="input-group-append">
+                                <div class="chattingMessageSend">
+                                    <button type="submit" class="btn btn-primary" name="message" id="sendChatButton">전송</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </form>
+                    
                 </div>
 
             </div>
             <!-- chatting 기능 (끝) -->
 
+            <script src="./js/checkChatMessage.js"></script>
+            <script src="./js/scrollbarAlwaysDown.js"></script>
+
         <?php
 
     } else {
 
+        ?>
 
+            <h1> 로그인된 사용자만 채팅에 참가할 수 있습니다. </h1>
+
+        <?php
 
     }
 
 ?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
