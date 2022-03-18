@@ -38,3 +38,7 @@ table {
     left: 27%;
     width: 1000px;
 }
+
+#expRankingPaginationBar {
+    font-family: "lumes";
+}

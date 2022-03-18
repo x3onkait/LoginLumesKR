@@ -102,7 +102,7 @@
         $totalPage = intval(ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM member")) / $limit));        // 표시 가능한 총 페이지 개수
 
         // 페이지네이션 선택 바 (유저들이 클릭해서 보는 부분)
-        echo '<div style="margin-top: 60px;" id="trnasactionViewPaginationBar">';
+        echo '<div style="margin-top: 60px;" id="expRankingPaginationBar">';
         echo '<ul class="pagination justify-content-center">';
 
             echo '<li class="page-item">';
