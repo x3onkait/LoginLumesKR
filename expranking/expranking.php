@@ -87,6 +87,76 @@
         echo '</tr>';
         echo '</div>';
 
+        // 페이지네이션
+        $limit = 10;
+
+        if(isset($_GET["page"])){
+            $page = intval($_GET["page"]);
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+        $result_with_limit = mysqli_query($conn, "SELECT * FROM member ORDER BY exp DESC LIMIT {$start_from}, {$limit}");
+
+        $totalPage = intval(ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM member")) / $limit));        // 표시 가능한 총 페이지 개수
+
+        // 페이지네이션 선택 바 (유저들이 클릭해서 보는 부분)
+        echo '<div style="margin-top: 60px;" id="trnasactionViewPaginationBar">';
+        echo '<ul class="pagination justify-content-center">';
+
+            echo '<li class="page-item">';
+                echo '<a class="page-link" href="?page=1">맨 처음 페이지</a>';
+            echo '</li>';
+
+                // previous button
+                if($page === 1){
+                    // 맨 처음 페이지인 경우 이전 페이지 버튼 사용 불가
+                    echo '<li class="page-item disabled">';
+                        echo '<a class="page-link" href="#" tabindex="-1">이전 페이지</a>';
+                    echo '</li>';
+                }else{
+                    echo '<li class="page-item">';
+                        echo '<a class="page-link" href="?page='.($page - 1).'">이전 페이지</a>';
+                    echo '</li>';
+                }
+
+                // selection button
+                for($pageSequence = $page - 5; $pageSequence <= $page + 5; $pageSequence++){
+                    if($pageSequence < 1)
+                        continue;
+                    if($pageSequence === $page){
+                        echo '<li class="page-item active" aria-current="page">';
+                            echo '<a class="page-link" href="?page='.$pageSequence.'">'.$pageSequence.'</a>';
+                        echo '</li>';
+                    } else {
+                        echo '<li class="page-item"><a class="page-link" href="?page='.$pageSequence.'">'.$pageSequence.'</a></li>';
+                    }
+                    if($pageSequence >= $totalPage)
+                        break;
+                }
+
+                // next button
+                if($page === $totalPage){
+                    // 맨 마지막 페이지인 경우 다음 페이지 버튼 사용 불가
+                    echo '<li class="page-item disabled">';
+                        echo '<a class="page-link" href="#" tabindex="-1">다음 페이지</a>';
+                    echo '</li>';
+                } else {
+                    echo '<li class="page-item">';
+                        echo '<a class="page-link" href="?page='.($page + 1).'">다음 페이지</a>';
+                    echo '</li>';
+                }
+
+                echo '<li class="page-item">';
+                    echo '<a class="page-link" id="lastpage" href="?page='.($totalPage).'">마지막 페이지</a>';
+                echo '</li>';
+
+            echo '</ul>';
+        echo '</div>';
+
+        // 페이지네이션 끝
+
         // ranking table overall this website
         // echo '<div style="position:relative; top: 40px;">';
         echo '<div class="ranking-table">';
@@ -104,12 +174,12 @@
         $exprankingUsernameData = "[";
         $exprankingUserExpamountData = "[";
 
-        while($row = mysqli_fetch_array($result)){
+        $rank_indicator = ($page - 1) * 10 + 1;
 
-            if($rank_indicator <= 10){
-                $exprankingUsernameData .= "\"" . $row['id'] . "\"" . ",";
-                $exprankingUserExpamountData .= $row['exp'] . ",";
-            }
+        while($row = mysqli_fetch_array($result_with_limit)){
+
+            $exprankingUsernameData .= "\"" . $row['id'] . "\"" . ",";
+            $exprankingUserExpamountData .= $row['exp'] . ",";
 
             echo '<tr>';
 
@@ -163,6 +233,8 @@
 
     Chart.defaults.global.defaultFontFamily = "lumes";
 
+    let currentRankingIndex = <?php echo $rank_indicator ?>;
+
     new Chart(document.getElementById("expranking-bar-chart-horizontal"), {
         type: 'horizontalBar',
         data: {
@@ -180,7 +252,7 @@
             legend: { display: false },
             title: {
                 display: true,
-                text: 'EXP 랭킹 상위 10위',
+                text: 'EXP 랭킹 (' + (currentRankingIndex - 10) + '위 ~ ' + (currentRankingIndex - 1) + '위)'
             },
             scales: {
                 xAxes: [
