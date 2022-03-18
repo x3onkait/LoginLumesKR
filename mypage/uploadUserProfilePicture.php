@@ -89,6 +89,9 @@
             // 이미지 업로드 확인
             if($isImageUploadSuccessful === true) {
 
+                // 캐시를 없애기 위해 별도의 arbitrary한 time()값을 붙임.
+                $changedProfilePictures = $filesavePath . "?t=" . time(); 
+
                 ?>
 
                     <script>
@@ -96,7 +99,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: '프로필 사진 업로드 완료',
-                            // imageUrl: '<?php // echo $filesavePath ?>',
+                            imageUrl: '<?php echo $changedProfilePictures ?>',
                             imageWidth: 400,
                             footer: '프로필 사진 변경이 성공적으로 수행되었습니다.'
                         }).then((result) => {
