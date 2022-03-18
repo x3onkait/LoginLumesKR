@@ -103,24 +103,14 @@
 
                     <?php 
 
-                        $id                     = $_writer['id'];
+                        $id                     = $_SESSION['id'];
                         $profilePicturePath     = "../_serverasset/_userProfilePictures/" . "profilePic_" . "$id" . ".jpg";
-                        $isProfilePictureExists = file_exists($profilePicturePath);
                     
-                        if($isProfilePictureExists === true) {
+                        // 일부러 시간으로 랜덤값을 주어 기존의 캐시로 인해
+                        // 업데이트 분이 강제 새로고침을 해야 보이는 것을 방지
+                        $profilePicturePath .= "?t=" . time();      
 
-                            // 일부러 시간으로 랜덤값을 주어 기존의 캐시로 인해
-                            // 업데이트 분이 강제 새로고침을 해야 보이는 것을 방지
-                            $profilePicturePath .= "?t=" . time();      
-
-                            echo '<img id="profileImage" src="' . $profilePicturePath . '" alt="profilePicture">';
-
-                        } else {
-
-                            $defaultProfilePicturePath = "../_serverasset/_defaultProfilePictures/_defaultProfileImage.jpg";
-                            echo '<img id="profileImage" src="' . $defaultProfilePicturePath . '" alt="profilePicture">';
-
-                        }
+                        echo '<img id="profileImage" src="' . $profilePicturePath . '" alt="profilePicture">';
                     
                     ?>
 

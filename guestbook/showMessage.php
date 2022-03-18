@@ -111,16 +111,6 @@ echo '</div>';
                     $id                     = $row['writer_id'];
                     $profilePicturePath     = "/_serverasset/_userProfilePictures/" . "profilePic_" . $id . ".jpg";
 
-                    // var_dump(file_exists($profilePicturePath));
-
-                    // 그냥 애초에 유저 만들 때 default profile 사진으로 그 회색 얼굴 사진을 "복사" 하자.
-
-                    // if(file_exists($profilePicturePath) === false) { 
-
-                    //     $profilePicturePath = "/_serverasset/_defaultProfilePictures/_defaultProfileImage.jpg";
-
-                    // }
-
                     if ($row['role'] === "Admin") {
                         echo '<td class="table-primary" scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
                         echo '<td class="table-primary" scope="col"><img src="' . $profilePicturePath . '" class="profileImage"></td>';

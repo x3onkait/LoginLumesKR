@@ -39,10 +39,6 @@
                 $writer_role        = $row['writer_role'];
 
                 $profilePicturePath     = "../_serverasset/_userProfilePictures/" . "profilePic_" . "$writer_id" . ".jpg";
-                if(file_exists($profilePicturePath) === false){
-                    // default profile picture
-                    $profilePicturePath = "../_serverasset/_defaultProfilePictures/_defaultProfileImage.jpg";
-                }
 
                 echo '<tr>';
                     echo '<td><img src="' . $profilePicturePath . '" class="profileImage"></td>';

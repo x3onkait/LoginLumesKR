@@ -95,6 +95,9 @@ if ($jsonResponse->success === true) {
 
         } else {
 
+            // 프로필 사진 (기본 프로필 사진으로 일단 복사)
+            copy("/_serverasset/_defaultProfilePictures/_defaultProfileImage.jpg", "/_serverasset/_userProfilePictures/profilePic_'$id'.jpg");
+
             ?>
 
             <script>
