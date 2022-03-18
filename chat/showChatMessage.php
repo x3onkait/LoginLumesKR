@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN.LUMES.KR</title>
     <link rel="shortcut icon" href="/favicon/logo.png">
+    <link rel="stylesheet" href="./css/showChatMessage.css">
 
 </head>
 
@@ -37,10 +38,16 @@
                 $date               = $row['date'];
                 $writer_role        = $row['writer_role'];
 
+                $profilePicturePath     = "../_serverasset/_userProfilePictures/" . "profilePic_" . "$writer_id" . ".jpg";
+                if(file_exists($profilePicturePath) === false){
+                    // default profile picture
+                    $profilePicturePath = "../_serverasset/_defaultProfilePictures/_defaultProfileImage.jpg";
+                }
 
                 echo '<tr>';
-                    echo '<td style="width: 30%;"><strong>' . $writer_id . '</strong>(' . $writer_nickname . ')</td>';
-                    echo '<td style="width: 50%;">' . $content . '</td>';
+                    echo '<td><img src="' . $profilePicturePath . '" class="profileImage"></td>';
+                    echo '<td style="width: 20%;"><strong>' . $writer_id . '<br></strong>(' . $writer_nickname . ')</td>';
+                    echo '<td style="width: 60%;">' . $content . '</td>';
                     echo '<td>' . $date . '</td>';
                 echo '</tr>';
 
