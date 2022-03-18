@@ -17,9 +17,6 @@
 
 <?php
 
-    session_start();
-    header('Content-Type: text/html; charset=utf-8');
-
     // DB connection
     require(dirname(__FILE__) . "/../dbconnection.php");
 
@@ -27,6 +24,7 @@
     $rawChatData = mysqli_query($conn, $query);
 
     echo '<div id="userLiveChatTable">';
+
         echo '<table>';
 
             while($row = mysqli_fetch_array($rawChatData)) {
@@ -50,6 +48,7 @@
                 
             }
         echo '</table>';
+
     echo '</div>';
 
 ?>

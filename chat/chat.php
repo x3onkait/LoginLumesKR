@@ -55,10 +55,6 @@
 
         ?>
 
-            <div id="title">
-                <h3>CHATTING! under construction...</h3>
-            </div>
-
             <!-- chatting 기능 (시작) -->
             <div class="container">
                 
@@ -67,7 +63,7 @@
                 </div>
 
                 <div class="chattingTitle">
-                    #public
+                    #public (under construction!!!)
                 </div>
 
                 <div class="chattingContents">
@@ -110,8 +106,9 @@
             </div>
             <!-- chatting 기능 (끝) -->
 
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="./js/checkChatMessage.js"></script>
-            <script src="./js/scrollbarAlwaysDown.js"></script>
+            <script src="./js/autorefresh.js"></script>
 
         <?php
 
@@ -126,5 +123,3 @@
     }
 
 ?>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
