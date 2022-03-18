@@ -38,13 +38,47 @@
 
                 $profilePicturePath     = "../_serverasset/_userProfilePictures/" . "profilePic_" . "$writer_id" . ".jpg";
 
-                echo '<tr>';
-                    echo '<td><img src="' . $profilePicturePath . '" class="profileImage"></td>';
-                    echo '<td style="width: 20%;"><strong>' . $writer_id . '<br></strong>(' . $writer_nickname . ')</td>';
-                    echo '<td style="width: 60%;">' . $content . '</td>';
-                    echo '<td>' . $date . '</td>';
-                echo '</tr>';
+                ?>
 
+                    <tr>
+                        <td style="vertical-align : top;"> <img src="<?php echo $profilePicturePath ?>" class="profileImage"> </td>
+                        <td style="width: 20%; padding-left: 15px; vertical-align : top;">
+
+                            <?php
+                                if($writer_role === "Admin"){
+                            ?>
+                                    <span style="font-weight: bold;"><?php echo $writer_id ?></span>
+                                    <span class="badge badge-pill badge-primary">Admin</span><br>
+
+                            <?php 
+                                } else if($writer_role === "QA") {
+                            ?>
+
+                                    <span style="font-weight: bold;"><?php echo $writer_id ?></span>
+                                    <span class="badge bg-dark" style="color: white;">QA</span><br>
+
+                            <?php
+                                } else {
+                            ?>
+
+                                    <span style="font-weight: bold;"><?php echo $writer_id ?></span><br>
+
+                            <?php
+                                }
+                            ?>
+                            
+                            <span style="color: gray;"><?php echo $writer_nickname ?></span>
+
+                        </td>
+
+                        <td style="width: 80%;"> 
+                            <span style="color: gray; font-size: 0.75em"><?php echo $date ?></span><br>
+                            <span><?php echo $content ?></span>
+                        </td>
+
+                    </tr>
+
+                <?php
                 
             }
         echo '</table>';
