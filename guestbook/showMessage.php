@@ -85,13 +85,15 @@ echo '</div>';
         <table class="table" style="table-layout: fixed; width: 100%">
             <colgroup>
                 <col width="10%" /> 
-                <col width="15%" /> 
-                <col width="60%" /> 
-                <col width="15%" /> 
+                <col width="1%" /> 
+                <col width="19%" />
+                <col width="58%" /> 
+                <col width="12%" /> 
             </colgroup>
             <thead class="thead-light">
                 <tr>
                     <th scope="col" style="text-align: center;">메시지 번호</th>
+                    <th scope="col" style=""></th>
                     <th scope="col" style="text-align: center;">작성자 ID</th>
                     <th scope="col" style="text-align: center;" style="width:700px;">메시지 (최근 100개)</th>
                     <th scope="col" style="text-align: center;">작성시간</th>
@@ -103,22 +105,39 @@ echo '</div>';
                 <?php
 
                 while ($row = mysqli_fetch_array($result_with_limit)) {
+
                     echo '<tr>';
+
+                    $id                     = $row['writer_id'];
+                    $profilePicturePath     = "/_serverasset/_userProfilePictures/" . "profilePic_" . $id . ".jpg";
+
+                    // var_dump(file_exists($profilePicturePath));
+
+                    // 그냥 애초에 유저 만들 때 default profile 사진으로 그 회색 얼굴 사진을 "복사" 하자.
+
+                    // if(file_exists($profilePicturePath) === false) { 
+
+                    //     $profilePicturePath = "/_serverasset/_defaultProfilePictures/_defaultProfileImage.jpg";
+
+                    // }
 
                     if ($row['role'] === "Admin") {
                         echo '<td class="table-primary" scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
+                        echo '<td class="table-primary" scope="col"><img src="' . $profilePicturePath . '" class="profileImage"></td>';
                         echo '<th class="table-primary" scope="col" style="text-align: center;">' . $row['writer_id'] . '<br>(' . $row['writer_nickname'] . ')<br>' . '&nbsp;<span class="badge badge-pill badge-primary">Admin</span>' . '</th>';
                         echo '<td class="table-primary" scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
                         echo '<td class="table-primary" scope="col" style="text-align: center;">' . $row['date'] . '</td>';
                     }
                     else if ($row['role'] === "QA") {
                         echo '<td scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
+                        echo '<td scope="col"><img src="' . $profilePicturePath . '" class="profileImage"></td>';
                         echo '<th scope="col" style="text-align: center;">' . $row['writer_id'] . '<br>(' . $row['writer_nickname'] . ')<br>' . '&nbsp;<span class="badge bg-dark" style="color: white;">QA</span>' . '</th>';
                         echo '<td scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
                         echo '<td scope="col" style="text-align: center;">' . $row['date'] . '</td>';
                     }
                     else {
                         echo '<td scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
+                        echo '<td scope="col"><img src="' . $profilePicturePath . '" class="profileImage"></td>';
                         echo '<th scope="col" style="text-align: center;">' . $row['writer_id'] . '<br>(' . $row['writer_nickname'] . ')<br>' . '</th>';
                         echo '<td scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
                         echo '<td scope="col" style="text-align: center;">' . $row['date'] . '</td>';

@@ -37,6 +37,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- end of sweetalert -->
 
+    <!-- for guestbook -->
+    <link rel="stylesheet" href="/guestbook/css/showMessage.css">
+    <!-- end of for guestbook -->
+
 </head>
 
 <body>

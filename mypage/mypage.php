@@ -103,7 +103,7 @@
 
                     <?php 
 
-                        $id                     = $_SESSION['id'];
+                        $id                     = $_writer['id'];
                         $profilePicturePath     = "../_serverasset/_userProfilePictures/" . "profilePic_" . "$id" . ".jpg";
                         $isProfilePictureExists = file_exists($profilePicturePath);
                     
