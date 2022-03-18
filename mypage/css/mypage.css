@@ -61,6 +61,7 @@ table {
     height: 200px;
     border: 2px solid darkgray;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 #profileImage:hover {
