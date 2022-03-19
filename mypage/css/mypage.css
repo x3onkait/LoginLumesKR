@@ -34,6 +34,15 @@ table {
     width: 70%;
 }
 
+#userBadgeTable {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 15%;
+    width: 70%;
+    border: 2px solid black;
+    text-align: center;
+}
+
 #changeInformationForm {
     margin: 0 auto;
     margin-top: 40px;

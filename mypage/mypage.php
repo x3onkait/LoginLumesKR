@@ -86,6 +86,205 @@
       ?>
     <!-- end -->
 
+    <!-- badge selection -->
+    <?php
+
+        function closestLowerHigherNr($array, $nr) {
+
+            sort($array);
+            $re_arr = array('lower' => min(current($array), $nr), 'higher' => max(end($array), $nr), 'closest' => $nr);
+
+            foreach($array as $num){
+
+                if($nr > $num) $re_arr['lower'] = $num;
+
+                else if($nr <= $num){
+                    $re_arr['higher'] = $num;
+                    break;
+                }
+
+            }
+
+            $re_arr['closest'] = (abs($nr - $re_arr['lower']) < abs($re_arr['higher'] - $nr)) ? $re_arr['lower'] : $re_arr['higher'];
+        
+            return $re_arr;
+        }
+
+        $userExpBadge = "/_serverasset/_badge/exp/";
+        $userRoleBadge = "/_serverasset/_badge/role/";
+        $userMessageQtyBadge = "/_serverasset/_badge/message/";
+
+        // 다음 레벨(뱃지)까지 남은 달성도 계산
+        // 현재 유저 상태값(경험치면 EXP 등..)으로부터 가장 가까운 달성값(1백만, 50만...)을 찾아 그것과 현재 경험치의 차를 찾는다.
+
+        // 유저 exp
+        if($userInformation['exp'] >= 1000000){
+            $userProgressToNextExpBadgeLevel = 100;
+        }else{
+            $userExpBadgeDecision = [1000000, 500000, 100000, 50000, 10000, 1];
+            $result = closestLowerHigherNr($userExpBadgeDecision, $userInformation['exp']);
+            $result = $result['higher'];
+
+            $userProgressToNextExpBadgeLevel = ($userInformation['exp'] / $result) * 100;
+
+        }
+
+        // 유저 게시글
+        if($userInformation['guestbookQty'] >= 1000000){
+            $userProgressToNextMessageQtyBadgeLevel = 100;
+        }else{
+            $userExpBadgeDecision = [5000, 1000, 500, 100, 50, 10, 1];
+            $result = closestLowerHigherNr($userExpBadgeDecision, $userInformation['guestbookQty']);
+            $result = $result['higher'];
+
+            $userProgressToNextMessageQtyBadgeLevel = ($userInformation['guestbookQty'] / $result) * 100;
+
+        }
+
+        // 경험치 뱃지 판단 기준
+        if($userInformation['exp'] >= 1000000){
+
+            $userExpBadge .= "1M.png";
+            $userExpBadgeMessage = "Millionaire";
+
+        } else if($userInformation['exp'] >= 500000) {
+
+            $userExpBadge .= "500K.png";
+            $userExpBadgeMessage = "Quite high!";
+
+        } else if($userInformation['exp'] >= 100000) {
+
+            $userExpBadge .= "100K.png";
+            $userExpBadgeMessage = "One hundred";
+
+        } else if($userInformation['exp'] >= 50000) {
+
+            $userExpBadge .= "50K.png";
+            $userExpBadgeMessage = "You visited here, right?";
+
+        } else if($userInformation['exp'] >= 10000) {
+
+            $userExpBadge .= "10K.png";
+            $userExpBadgeMessage = "Beginner";
+
+        } else {
+
+            $userExpBadge .= "1.png";
+            $userExpBadgeMessage = "Welcome";
+
+        }
+
+
+        // 유저 메시지(수) 뱃지 판단 기준
+        if($userInformation['guestbookQty'] >= 5000) {
+
+            $userMessageQtyBadge .= "5K.png";
+            $userMessageQtyBadgeMessage = "Wow, so much speakin'";
+
+        } else if($userInformation['guestbookQty'] >= 1000) {
+
+            $userMessageQtyBadge .= "1K.png";
+            $userMessageQtyBadgeMessage = "thousand of speech";
+
+        } else if($userInformation['guestbookQty'] >= 500) {
+
+            $userMessageQtyBadge .= "500.png";
+            $userMessageQtyBadgeMessage = "Submit Submit Submit";
+
+        } else if($userInformation['guestbookQty'] >= 100) {
+
+            $userMessageQtyBadge .= "100.png";
+            $userMessageQtyBadgeMessage = "ordinary talker";
+
+        } else if($userInformation['guestbookQty'] >= 50) {
+
+            $userMessageQtyBadge .= "50.png";
+            $userMessageQtyBadgeMessage = "Still shy!";
+
+        } else if($userInformation['guestbookQty'] >= 10) {
+
+            $userMessageQtyBadge .= "10.png";
+            $userMessageQtyBadgeMessage = "introduce yourself";
+
+        } else {
+
+            $userMessageQtyBadge .= "1.png";
+            $userMessageQtyBadgeMessage = "hello world";
+
+        }
+
+
+        // 역할 뱃지 판단 기준
+        if($userInformation['role'] === "Admin"){
+
+            $userRoleBadge .= "Admin.png";
+            $userRoleBadgemessage = "Wow, you're an admin";
+
+        } else if($userInformation['role'] === "QA") {
+
+            $userRoleBadge .= "QA.png";
+            $userRoleBadgemessage = "Quality Assurance!";
+
+        } else {
+
+            $userRoleBadge .= "user.png";
+            $userRoleBadgemessage = "You're a user!";
+
+        }
+
+    ?>
+
+    <table class="table table-striped" id="userBadgeTable">
+        <thead>
+            <th>
+                <img src="<?php echo $userExpBadge ?>" width="150px">
+            </th>
+            <th>
+                <img src="<?php echo $userMessageQtyBadge ?>" width="150px">
+            </th>
+            <th>
+                <img src="<?php echo $userRoleBadge ?>" width="150px">
+            </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span><strong>경험치 뱃지</strong></span><br>
+                    <span>"<?php echo $userExpBadgeMessage ?>"</span>
+                </td>
+                <td>
+                    <span><strong>메시지 뱃지</strong></span><br>
+                    <span>"<?php echo $userMessageQtyBadgeMessage ?>"</span>
+                </td>   
+                <td>
+                    <span><strong>유저 역할</strong></span><br>
+                    <span>"<?php echo $userRoleBadgemessage ?>"</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: <?php echo $userProgressToNextExpBadgeLevel ?>%;" aria-valuenow="25" 
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: <?php echo $userProgressToNextMessageQtyBadgeLevel ?>%;" aria-valuenow="25" 
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
     <table id="changeInformationForm">
         <thead>
             <tr>
