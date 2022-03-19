@@ -34,9 +34,8 @@
 }
 
     .chattingSelectionBar {
-        grid-area: 1 / 1 / 11 / 3;
+        grid-area: 1 / 1 / 10 / 3;
         border: 2px solid darkgray;
-        height: 70vh;
         margin-right: 10px;
         font-size: 20px;
         border-radius: 10px;
@@ -81,12 +80,14 @@
         }    
 
     .chattingUserTypingForm {
-        grid-area: 10 / 3 / 11 / 11;
+        grid-area: 10 / 1 / 11 / 11;
+        /* grid-area: 10 / 3 / 11 / 11; */
         position: relative;
     }
 
     .chattingUsername {
-        grid-area: 10 / 3 / 11 / 5;
+        grid-area: 10 / 3 / 11 / 5 ;
+        width: 19%;
         margin-right: 10px;
     }
 
@@ -94,7 +95,7 @@
         grid-area: 10 / 5 / 11 / 10;
         margin-right: 10px;
         margin-top: 16px;
-        width: 63%;
+        width: 74%;
     }
 
     .chattingMessageSend {
