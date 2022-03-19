@@ -109,7 +109,11 @@ header('Content-Type: text/html; charset=utf-8');
             $makeTransactionLog     = mysqli_query($conn, "INSERT INTO exp_transactions (transaction_number, type, source, target, amount, date) 
                                                     VALUES ('$transaction_number', '$type', '$id', '$giveExpTarget', '$giveExpAmount', '$date') ");
 
-            if($result === false || $makeTransactionLog === false) {
+            // 송금 누적내역 기록
+            $addExpTransactionQty   = mysqli_query($conn, "UPDATE member SET expTransactionQty = expTransactionQty + '$giveExpAmount' 
+                                                     WHERE id = '$id' or id = '$giveExpTarget'");
+
+            if($result === false || $makeTransactionLog === false || $addExpTransactionQty === false) {
 
 
                 // 작업 실패

@@ -113,6 +113,7 @@
         $userExpBadge = "/_serverasset/_badge/exp/";
         $userRoleBadge = "/_serverasset/_badge/role/";
         $userMessageQtyBadge = "/_serverasset/_badge/message/";
+        $userTransactionQtyBadge = "/_serverasset/_badge/transaction/";
 
         // 다음 레벨(뱃지)까지 남은 달성도 계산
         // 현재 유저 상태값(경험치면 EXP 등..)으로부터 가장 가까운 달성값(1백만, 50만...)을 찾아 그것과 현재 경험치의 차를 찾는다.
@@ -139,6 +140,17 @@
 
             $userProgressToNextMessageQtyBadgeLevel = ($userInformation['guestbookQty'] / $result) * 100;
 
+        }
+
+        // 유저 경험치 총량
+        if($userInformation['expTransactionQty'] >= 10000000){
+            $userProgressToNextTransactionBadgeLevel = 100;
+        }else{
+            $userExpBadgeDecision = [10000000, 5000000, 1000000, 500000, 100000, 50000];
+            $result = closestLowerHigherNr($userExpBadgeDecision, $userInformation['expTransactionQty']);
+            $result = $result['higher'];
+
+            $userProgressToNextTransactionBadgeLevel = ($userInformation['expTransactionQty'] / $result) * 100;
         }
 
         // 경험치 뱃지 판단 기준
@@ -213,6 +225,44 @@
 
         }
 
+        // transaction 뱃지 판단 기준
+        if($userInformation['expTransactionQty'] >= 10000000) {
+
+            $userTransactionQtyBadge .= "10M.png";
+            $userTransactionQtyBadgeMessage = "Professional banker";
+
+        } else if($userInformation['expTransactionQty'] >= 5000000) {
+
+            $userTransactionQtyBadge .= "5M.png";
+            $userTransactionQtyBadgeMessage = "a godfather";
+
+        } else if($userInformation['expTransactionQty'] >= 1000000) {
+
+            $userTransactionQtyBadge .= "1M.png";
+            $userTransactionQtyBadgeMessage = "businessperson";
+
+        } else if($userInformation['expTransactionQty'] >= 500000) {
+
+            $userTransactionQtyBadge .= "500K.png";
+            $userTransactionQtyBadgeMessage = "Transact quite a lot";
+
+        } else if($userInformation['expTransactionQty'] >= 100000) {
+
+            $userTransactionQtyBadge .= "100K.png";
+            $userTransactionQtyBadgeMessage = "a hundred thousand";
+
+        } else if($userInformation['expTransactionQty'] >= 50000) {
+
+            $userTransactionQtyBadge .= "50K.png";
+            $userTransactionQtyBadgeMessage = "send send send";
+
+        } else {
+
+            $userTransactionQtyBadge .= "0.png";
+            $userTransactionQtyBadgeMessage = "exp beginner";
+
+        }
+
 
         // 역할 뱃지 판단 기준
         if($userInformation['role'] === "Admin"){
@@ -243,6 +293,9 @@
                 <img src="<?php echo $userMessageQtyBadge ?>" width="150px">
             </th>
             <th>
+                <img src="<?php echo $userTransactionQtyBadge ?>" width="150px">
+            </th>
+            <th>
                 <img src="<?php echo $userRoleBadge ?>" width="150px">
             </th>
         </thead>
@@ -255,7 +308,11 @@
                 <td>
                     <span><strong>메시지 뱃지</strong></span><br>
                     <span>"<?php echo $userMessageQtyBadgeMessage ?>"</span>
-                </td>   
+                </td>
+                <td>
+                    <span><strong>EXP 송금 뱃지</strong></span><br>
+                    <span>"<?php echo $userTransactionQtyBadgeMessage ?>"</span>
+                </td>
                 <td>
                     <span><strong>유저 역할</strong></span><br>
                     <span>"<?php echo $userRoleBadgemessage ?>"</span>
@@ -279,7 +336,15 @@
                     </div>
                 </td>
                 <td>
-
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: <?php echo $userProgressToNextTransactionBadgeLevel ?>%;" aria-valuenow="25" 
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    
                 </td>
             </tr>
         </tbody>

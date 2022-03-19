@@ -133,6 +133,10 @@
                 // 송금 개시
                 $loseMyExpAmount        = mysqli_query($conn, "UPDATE member SET exp = exp - '$sendExpAmount' WHERE id = '$id'");
                 $gainTargetExpAmount    = mysqli_query($conn, "UPDATE member SET exp = exp + '$sendExpAmount' WHERE id = '$sendExpTarget'");
+                
+                // 송금 누적내역 기록
+                $addExpTransactionQty   = mysqli_query($conn, "UPDATE member SET expTransactionQty = expTransactionQty + '$sendExpAmount' 
+                                                                             WHERE id = '$id' or id = '$sendExpTarget'");
 
                 // 송금 기록 남기기
                 // date_default_timezone_set("Asia/Seoul");
@@ -148,7 +152,7 @@
                 $makeTransactionLog     = mysqli_query($conn, "INSERT INTO exp_transactions (transaction_number, type, source, target, amount, date) 
                                                         VALUES ('$transaction_number', '$type', '$id', '$sendExpTarget', '$sendExpAmount', '$date') ");
 
-                if($loseMyExpAmount === false || $gainTargetExpAmount === false || $makeTransactionLog === false) {
+                if($loseMyExpAmount === false || $addExpTransactionQty === false || $gainTargetExpAmount === false || $makeTransactionLog === false) {
 
                     ?>
 
