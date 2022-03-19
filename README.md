@@ -154,3 +154,25 @@ CREATE TABLE IF NOT EXISTS `exp_transactions` (
 - target : 거래 당사자(EXP를 받은 사람 | TO)
 - amount : 거래량. 경험치(EXP)를 재화 삼아서 최소 1EXP 단위로 송금함.
 - date : 거래 성사 일시
+
+`chat` DB 구조 (보다 대화가 간편해진 채팅 시스템에서 사용하는 데이터베이스)
+```sql
+CREATE TABLE `chat` (
+  `idx` int(10) NOT NULL COMMENT '채팅 메시지 고유번호',
+  `message_room` varchar(100) NOT NULL COMMENT '채팅방 이름',
+  `writer_id` varchar(255) NOT NULL COMMENT '채팅 메시지 작성 ID',
+  `writer_nickname` varchar(30) NOT NULL COMMENT '채팅 메시지 작성 닉네임',
+  `content` varchar(1000) NOT NULL COMMENT '채팅 메시지 내용',
+  `date` datetime NOT NULL COMMENT '채팅 메시지 날짜',
+  `ip` varchar(40) NOT NULL COMMENT '채팅을 작성한 IP',
+  `writer_role` varchar(1000) NOT NULL COMMENT '채팅 내용'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='login.lumes.kr 채팅 내역';
+```
+- idx : (`auto_increment` 적용) 채팅 고유 순서 번호
+- message_room : 메시지가 전달된 채팅방의 이름(채팅방의 이름에 따라 구분) *현재 방 분리는 계획 중에 있음*
+- writer_id : 메시지 작성자의 ID
+- writer_nick : 메시지 작성자의 닉네임
+- content : 메시지 내용
+- date : 메시지를 보낸 날짜
+- ip : 메시지를 보낸 사람의 당시 IP
+- writer_role : 메시지를 보낸 사람의 역할 (관리자, 유저 등..)
