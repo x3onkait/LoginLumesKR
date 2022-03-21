@@ -20,7 +20,11 @@
     // DB connection
     require(dirname(__FILE__) . "/../dbconnection.php");
 
-    $query = "SELECT * FROM chat WHERE message_room = 'public' ORDER BY idx ASC LIMIT 100";
+    $query = "SELECT res.* FROM 
+                    (SELECT * FROM chat WHERE message_room = 'public' 
+                     ORDER BY idx DESC LIMIT 100) res 
+              ORDER BY res.idx ASC";
+
     $rawChatData = mysqli_query($conn, $query);
 
     echo '<div id="userLiveChatTable">';
