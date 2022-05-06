@@ -111,25 +111,27 @@ echo '</div>';
                     $id                     = $row['writer_id'];
                     $profilePicturePath     = "/_serverasset/_userProfilePictures/" . "profilePic_" . $id . ".jpg";
 
+                    $user_comment           = htmlspecialchars($row['comment']);
+
                     if ($row['role'] === "Admin") {
                         echo '<td class="table-primary" scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
                         echo '<td class="table-primary" scope="col"><img src="' . $profilePicturePath . '" class="profileImage"></td>';
                         echo '<th class="table-primary" scope="col" style="text-align: center;">' . $row['writer_id'] . '<br>(' . $row['writer_nickname'] . ')<br>' . '&nbsp;<span class="badge badge-pill badge-primary">Admin</span>' . '</th>';
-                        echo '<td class="table-primary" scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
+                        echo '<td class="table-primary" scope="col" style="word-wrap: break-word;">' . $user_comment . '</td>';
                         echo '<td class="table-primary" scope="col" style="text-align: center;">' . $row['date'] . '</td>';
                     }
                     else if ($row['role'] === "QA") {
                         echo '<td scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
                         echo '<td scope="col"><img src="' . $profilePicturePath . '" class="profileImage"></td>';
                         echo '<th scope="col" style="text-align: center;">' . $row['writer_id'] . '<br>(' . $row['writer_nickname'] . ')<br>' . '&nbsp;<span class="badge bg-dark" style="color: white;">QA</span>' . '</th>';
-                        echo '<td scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
+                        echo '<td scope="col" style="word-wrap: break-word;">' . $user_comment . '</td>';
                         echo '<td scope="col" style="text-align: center;">' . $row['date'] . '</td>';
                     }
                     else {
                         echo '<td scope="col" style="text-align: center;">' . $row['idx'] . '</td>';
                         echo '<td scope="col"><img src="' . $profilePicturePath . '" class="profileImage"></td>';
                         echo '<th scope="col" style="text-align: center;">' . $row['writer_id'] . '<br>(' . $row['writer_nickname'] . ')<br>' . '</th>';
-                        echo '<td scope="col" style="word-wrap: break-word;">' . $row['comment'] . '</td>';
+                        echo '<td scope="col" style="word-wrap: break-word;">' . $user_comment . '</td>';
                         echo '<td scope="col" style="text-align: center;">' . $row['date'] . '</td>';
                     }
 
