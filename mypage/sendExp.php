@@ -28,7 +28,7 @@
     require(dirname(__FILE__) . "/../dbconnection.php");  
 
     $id = $_SESSION['id'];
-    $sendExpTarget = $_POST['sendExpTarget'];
+    $sendExpTarget = strtolower($_POST['sendExpTarget']);
     $sendExpAmount = (int)$_POST['sendExpAmount'];
 
     if($id === $sendExpTarget) {
@@ -41,7 +41,7 @@
                     icon: 'question',
                     title: 'Why...?',
                     text: '자기 자신에게 송금하시나요?',
-                    footer: '안타깝지만 아무런 EXP 잔고의 변화가 일어나지는 않습니다.'
+                    footer: '안타깝지만 아무런 EXP 잔고의 변화가 일어나지는 않습니다. ID를 대문자 소문자 섞으셔도 안 됩니다. ID는 소문자가 원칙이에요.'
                 }).then((result) => {
                     location.href = "./mypage.php";
                 })

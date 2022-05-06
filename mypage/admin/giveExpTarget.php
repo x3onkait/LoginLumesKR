@@ -52,8 +52,8 @@ header('Content-Type: text/html; charset=utf-8');
         // DB connection
         require(dirname(__FILE__) . "/../../dbconnection.php");
 
-        $giveExpTarget = $_POST['give-exp-target'];
-        $giveExpAmount = $_POST['give-exp-amount'];
+        $giveExpTarget = strtolower($_POST['give-exp-target']);
+        $giveExpAmount = strtolower($_POST['give-exp-amount']);
 
         if($giveExpTarget === NULL || $giveExpAmount === NULL || is_numeric($giveExpAmount) === false){
 

@@ -93,7 +93,8 @@ if (isset($_SESSION['id'])) {
         $ip = $_SERVER['REMOTE_ADDR'];
 
             
-        $query = "INSERT INTO guestbook (writer_id, writer_nickname, comment, date, ip, role) VALUES('$writer_id', '$writer_nickname' ,'$comment', '$date', '$ip', '$writer_role')";
+        $query = "INSERT INTO guestbook (writer_id, writer_nickname, comment, date, ip, role) 
+                    VALUES('$writer_id', '$writer_nickname' ,'$comment', '$date', '$ip', '$writer_role')";
         $result = mysqli_query($conn, $query);
 
         if ($result === false) {
